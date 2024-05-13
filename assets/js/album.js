@@ -8,11 +8,16 @@ const tracksAlbum = document.querySelector(".tracksAlbum");
 const artistImageLittle = document.querySelector(".artistImageLittle");
 
 const generateTracks = function (TracksArray) {
-  TracksArray.forEach((track) => {
+  TracksArray.forEach((track, index) => {
+    const minutes = Math.floor(track.duration / 60);
+    const seconds = track.duration % 60;
+    const formattedRank = track.rank.toLocaleString();
+
     const newCol = document.createElement("div");
     newCol.classList.add("col");
     newCol.innerHTML = `
-      <div class="col-1 text-end"><p>${track.position}</p></div>
+    <div class=" d-flex"> 
+      <div class="col-1 text-center numberTrack"><p>${index + 1}</p></div>
       <div class="col-5">
         <div class="row flex-column">
           <div class="col d-flex text-start p-0">
@@ -23,8 +28,11 @@ const generateTracks = function (TracksArray) {
           </div>
         </div>
       </div>
-      <div class="col-4 text-center">${track.rank}</div>
-      <div class="col-2 text-end">${track.duration}</div>
+      <div class="col-4 text-center">${formattedRank}</div>
+      <div class="col-2 text-end">${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}</div> 
+      </div>
     `;
     tracksAlbum.appendChild(newCol);
   });
@@ -32,9 +40,9 @@ const generateTracks = function (TracksArray) {
 
 const getAlbumCard = function () {
   const addressBarContent = new URLSearchParams(location.search);
-  const eventId = addressBarContent.get("eventId");
+  const albumId = addressBarContent.get("albumId");
 
-  fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${eventId}`)
+  fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -43,6 +51,14 @@ const getAlbumCard = function () {
       }
     })
     .then((albumArray) => {
+      albumImageBig.onload = function () {
+        const colorThief = new ColorThief();
+        const dominantColor = colorThief.getColor(albumImageBig);
+        const palette = colorThief.getPalette(albumImageBig, 5);
+
+        const mainColumnAlbum = document.getElementById("mainColumnAlbum");
+        mainColumnAlbum.style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 1)`;
+      };
       albumImageBig.src = albumArray.cover_big;
       titleAlbumBig.innerText = albumArray.title;
       artistAlbum.innerText = albumArray.artist.name;
@@ -53,7 +69,7 @@ const getAlbumCard = function () {
       generateTracks(albumArray.tracks.data);
     })
     .catch((err) => {
-      console.error("ERRORE", error);
+      console.err("ERRORE", err);
     });
 };
 
