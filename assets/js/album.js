@@ -12,7 +12,8 @@ const generateTracks = function (TracksArray) {
     const newCol = document.createElement("div");
     newCol.classList.add("col");
     newCol.innerHTML = `
-      <div class="col-1 text-end"><p>${track.position}</p></div>
+    <div class=" d-flex"> 
+      <div class="col-1 text-center"><p>1</p></div>
       <div class="col-5">
         <div class="row flex-column">
           <div class="col d-flex text-start p-0">
@@ -25,6 +26,7 @@ const generateTracks = function (TracksArray) {
       </div>
       <div class="col-4 text-center">${track.rank}</div>
       <div class="col-2 text-end">${track.duration}</div>
+      </div>
     `;
     tracksAlbum.appendChild(newCol);
   });
@@ -32,9 +34,9 @@ const generateTracks = function (TracksArray) {
 
 const getAlbumCard = function () {
   const addressBarContent = new URLSearchParams(location.search);
-  const eventId = addressBarContent.get("eventId");
+  const albumId = addressBarContent.get("albumId");
 
-  fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${eventId}`)
+  fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`)
     .then((response) => {
       if (response.ok) {
         return response.json();
