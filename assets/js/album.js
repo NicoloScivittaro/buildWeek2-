@@ -51,14 +51,6 @@ const getAlbumCard = function () {
       }
     })
     .then((albumArray) => {
-      albumImageBig.onload = function () {
-        const colorThief = new ColorThief();
-        const dominantColor = colorThief.getColor(albumImageBig);
-        const palette = colorThief.getPalette(albumImageBig, 5);
-
-        const mainColumnAlbum = document.getElementById("mainColumnAlbum");
-        mainColumnAlbum.style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 1)`;
-      };
       albumImageBig.src = albumArray.cover_big;
       titleAlbumBig.innerText = albumArray.title;
       artistAlbum.innerText = albumArray.artist.name;
@@ -74,3 +66,26 @@ const getAlbumCard = function () {
 };
 
 getAlbumCard();
+
+const mainColumnAlbum = document.getElementById("mainColumnAlbum");
+
+const colorThief = new ColorThief();
+
+// Verifica se l'immagine è già stata caricata
+if (albumImageBig.complete) {
+  setColorFromImage();
+} else {
+  // Aggiungi un listener per l'evento di caricamento dell'immagine
+  albumImageBig.addEventListener("load", setColorFromImage);
+}
+
+function setColorFromImage() {
+  // Ottieni il colore dominante dall'immagine
+  const dominantColor = colorThief.getColor(albumImageBig);
+
+  // Crea una classe CSS con il colore dominante
+  const colorClass = `color-${dominantColor[0]}-${dominantColor[1]}-${dominantColor[2]}`;
+
+  // Aggiungi la classe al mainColumnAlbum
+  mainColumnAlbum.classList.add(colorClass);
+}
