@@ -8,12 +8,16 @@ const tracksAlbum = document.querySelector(".tracksAlbum");
 const artistImageLittle = document.querySelector(".artistImageLittle");
 
 const generateTracks = function (TracksArray) {
-  TracksArray.forEach((track) => {
+  TracksArray.forEach((track, index) => {
+    const minutes = Math.floor(track.duration / 60);
+    const seconds = track.duration % 60;
+    const formattedRank = track.rank.toLocaleString();
+
     const newCol = document.createElement("div");
     newCol.classList.add("col");
     newCol.innerHTML = `
     <div class=" d-flex"> 
-      <div class="col-1 text-center"><p>1</p></div>
+      <div class="col-1 text-center numberTrack"><p>${index + 1}</p></div>
       <div class="col-5">
         <div class="row flex-column">
           <div class="col d-flex text-start p-0">
@@ -24,8 +28,10 @@ const generateTracks = function (TracksArray) {
           </div>
         </div>
       </div>
-      <div class="col-4 text-center">${track.rank}</div>
-      <div class="col-2 text-end">${track.duration}</div>
+      <div class="col-4 text-center">${formattedRank}</div>
+      <div class="col-2 text-end">${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}</div> 
       </div>
     `;
     tracksAlbum.appendChild(newCol);
