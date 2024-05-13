@@ -53,7 +53,7 @@ const getAlbumCard = function () {
       generateTracks(albumArray.tracks.data);
     })
     .catch((err) => {
-      console.error("ERRORE", err);
+      console.error("ERRORE", error);
     });
 };
 
