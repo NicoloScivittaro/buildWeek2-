@@ -51,6 +51,14 @@ const getAlbumCard = function () {
       }
     })
     .then((albumArray) => {
+      albumImageBig.onload = function () {
+        const colorThief = new ColorThief();
+        const dominantColor = colorThief.getColor(albumImageBig);
+        const palette = colorThief.getPalette(albumImageBig, 5);
+
+        const mainColumnAlbum = document.getElementById("mainColumnAlbum");
+        mainColumnAlbum.style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 1)`;
+      };
       albumImageBig.src = albumArray.cover_big;
       titleAlbumBig.innerText = albumArray.title;
       artistAlbum.innerText = albumArray.artist.name;
@@ -61,7 +69,7 @@ const getAlbumCard = function () {
       generateTracks(albumArray.tracks.data);
     })
     .catch((err) => {
-      console.error("ERRORE", error);
+      console.error("ERRORE", err);
     });
 };
 
