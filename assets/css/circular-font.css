@@ -1,3 +1,6 @@
+* {
+  font-family: "Circular", sans-serif;
+}
 @font-face {
   font-family: "Circular";
   src: url(../fonts/CircularStd-Light.otf);
@@ -63,4 +66,13 @@
   src: url(../fonts/CircularStd-BlackItalic.otf);
   font-weight: 900;
   font-style: italic;
+}
+
+aside a {
+  color: secondary;
+  transition: all 0.2s ease;
+}
+
+aside a:hover {
+  color: white;
 }
