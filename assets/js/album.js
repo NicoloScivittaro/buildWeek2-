@@ -8,6 +8,7 @@ const tracksAlbum = document.querySelector(".tracksAlbum");
 const artistImageLittle = document.querySelector(".artistImageLittle");
 const mainColumnAlbum = document.getElementById("mainColumnAlbum");
 const buttonPlay = document.getElementById("buttonPlay");
+const albumHero = document.querySelector(".albumHero");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -69,14 +70,15 @@ const getAlbumCard = function () {
       const colorThief = new ColorThief();
       albumImageBig.crossOrigin = "Anonymous";
       const windowWidth = window.innerWidth;
-
       if (albumImageBig.complete) {
         const color = colorThief.getColor(albumImageBig);
         applyGradient(color, windowWidth);
+        applyTextColor(color);
       } else {
         albumImageBig.addEventListener("load", function () {
           const color = colorThief.getColor(albumImageBig);
           applyGradient(color, windowWidth);
+          applyTextColor(color);
         });
       }
 
@@ -111,12 +113,27 @@ function applyGradient(color, windowWidth) {
       gradient = `linear-gradient(to bottom, ${gradientColor} 380px, black 420px)`;
       break;
     case windowWidth >= 1400:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 385px, black 450px)`;
+      gradient = `linear-gradient(to bottom, ${gradientColor} 340px, black 450px)`;
       break;
   }
 
   mainColumnAlbum.style.background = gradient;
 }
+function applyTextColor(color) {
+  const backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+  const textColor =
+    chroma.contrast(backgroundColor, "black") >
+    chroma.contrast(backgroundColor, "white")
+      ? "black"
+      : "white";
+  titleAlbumBig.style.color = textColor;
+  artistAlbum.style.color = textColor;
+  releaseAlbum.style.color = textColor;
+  albumTracks.style.color = textColor;
+  albumDuration.style.color = textColor;
+  albumHero.style.color = textColor;
+}
+
 const numberTransform = function () {
   const numberTracks = document.querySelectorAll(".numberTrack");
 
