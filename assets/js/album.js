@@ -18,14 +18,16 @@ const generateTracks = function (TracksArray) {
     newCol.classList.add("col");
     newCol.innerHTML = `
     <div class=" d-flex  align-items-center mb-2"> 
-      <div class="col-1 text-center numberTrack"><p>${index + 1}</p></div>
+      <div class="col-1 text-center numberTrack text-light text-opacity-75"><p>${
+        index + 1
+      }</p></div>
       <div class="col-5">
         <div class="row flex-column">
           <div class="col d-flex text-start p-0">
-            <p class="titleBold">${track.title}</p>
+            <p class="titleBold text-light">${track.title}</p>
           </div>
           <div class="col p-0">
-            <p class="artistAlbum text-light text-opacity-50 authorDescription
+            <p class="artistAlbum text-light text-opacity-75 authorDescription
             ">${track.artist.name}</p>
           </div>
         </div>
@@ -68,11 +70,13 @@ const getAlbumCard = function () {
 
       if (albumImageBig.complete) {
         const color = colorThief.getColor(albumImageBig);
-        mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        // mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        applyGradient(color);
       } else {
         albumImageBig.addEventListener("load", function () {
           const color = colorThief.getColor(albumImageBig);
-          mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+          // mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+          applyGradient(color);
         });
       }
 
@@ -84,3 +88,9 @@ const getAlbumCard = function () {
 };
 
 getAlbumCard();
+
+function applyGradient(color) {
+  const gradientColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+  const gradient = `linear-gradient(to bottom, ${gradientColor} 350px, black 390px)`;
+  mainColumnAlbum.style.background = gradient;
+}
