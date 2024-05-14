@@ -6,6 +6,7 @@ const albumTracks = document.querySelector(".albumTracks");
 const albumDuration = document.querySelector(".albumDuration");
 const tracksAlbum = document.querySelector(".tracksAlbum");
 const artistImageLittle = document.querySelector(".artistImageLittle");
+const mainColumnAlbum = document.getElementById("mainColumnAlbum");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -56,9 +57,25 @@ const getAlbumCard = function () {
       titleAlbumBig.innerText = albumArray.title;
       artistAlbum.innerText = albumArray.artist.name;
       releaseAlbum.innerText = albumArray.release_date;
-      albumTracks.innerText = albumArray.nb_tracks;
-      albumDuration.innerText = albumArray.duration;
+      const durataTotaleAlbumSec = albumArray.duration;
+      const durataTotaleAlbumMin = Math.floor(durataTotaleAlbumSec / 60);
+      const durataTotaleAlbumSecRimasti = durataTotaleAlbumSec % 60;
+      const durataTotaleAlbumStringa = `${durataTotaleAlbumMin} min ${durataTotaleAlbumSecRimasti} sec`;
+      albumTracks.innerText = `${albumArray.nb_tracks} brani,  ${durataTotaleAlbumStringa}`;
       artistImageLittle.src = albumArray.artist.picture_small;
+      const colorThief = new ColorThief();
+      albumImageBig.crossOrigin = "Anonymous";
+
+      if (albumImageBig.complete) {
+        const color = colorThief.getColor(albumImageBig);
+        mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+      } else {
+        albumImageBig.addEventListener("load", function () {
+          const color = colorThief.getColor(albumImageBig);
+          mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        });
+      }
+
       generateTracks(albumArray.tracks.data);
     })
     .catch((err) => {
@@ -67,12 +84,3 @@ const getAlbumCard = function () {
 };
 
 getAlbumCard();
-
-const mainColumnAlbum = document.getElementById("mainColumnAlbum");
-
-const colorThief = new ColorThief();
-albumImageBig.onload = function () {
-  const dominantColor = colorThief.getColor(albumImageBig);
-  const rgbColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
-  mainColumnAlbum.style.setProperty("background-color", rgbColor, "important");
-};
