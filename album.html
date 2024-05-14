@@ -19,40 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
     />
 
-    <style>
-      body {
-        font-family: "Montserrat", sans-serif;
-      }
-
-      .accountImage {
-        width: 25px;
-      }
-      .fontAccount {
-        font-size: 13px;
-      }
-
-      .albumTitleMain {
-        font-size: 65px;
-      }
-      .albumTitles {
-        font-size: 13px;
-      }
-      .descriptionAlbum {
-        font-size: 10px;
-      }
-      p {
-        margin: 0;
-        padding: 0;
-      }
-
-      .titleBold {
-        font-weight: 700 !important;
-      }
-
-      .authorDescription {
-        font-size: 11px;
-      }
-    </style>
+    <link rel="stylesheet" href="./assets/css/album.css" />
   </head>
   <body>
     <main class="vh-100">
@@ -69,10 +36,14 @@
               <div class="col-12">
                 <div class="row">
                   <div class="col">
-                    <button class="rounded-circle">
+                    <button
+                      class="rounded-circle text-bg-secondary border-0 bg-opacity-50"
+                    >
                       <i class="bi bi-chevron-left"></i>
                     </button>
-                    <button class="rounded-circle">
+                    <button
+                      class="rounded-circle text-bg-secondary border-0 bg-opacity-50"
+                    >
                       <i class="bi bi-chevron-right"></i>
                     </button>
                   </div>
@@ -147,13 +118,22 @@
               <div
                 class="col-3 d-flex justify-content-evenly align-items-center mt-3"
               >
-                <button class="rounded-circle">
+                <button
+                  class="rounded-circle spotifyColor border-1"
+                  id="buttonPlay"
+                >
                   <i class="ps-1 bi bi-play-fill fs-4"></i>
                 </button>
 
-                <i class="bi bi-heart-fill fs-5"></i>
-                <i class="bi bi-arrow-down-circle fs-5"></i>
-                <i class="bi bi-three-dots fs-5"></i>
+                <i class="bi bi-heart fs-5 cursorPointer text-light iconTop">
+                  <span class="heart-inner"></span
+                ></i>
+                <i
+                  class="bi bi-arrow-down-circle fs-5 cursorPointer text-light iconTop"
+                ></i>
+                <i
+                  class="bi bi-three-dots fs-5 cursorPointer text-light iconTop"
+                ></i>
               </div>
             </div>
             <div
@@ -164,8 +144,8 @@
               <div class="col-4 text-center text-light">
                 <p>RIPRODUZIONI</p>
               </div>
-              <div class="col-2 text-end text-light">
-                <i class="bi bi-clock"></i>
+              <div class="col-2 text-end">
+                <i class="bi bi-clock text-light"></i>
               </div>
             </div>
             <div

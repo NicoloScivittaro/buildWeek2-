@@ -1,0 +1,44 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.accountImage {
+  width: 25px;
+}
+.fontAccount {
+  font-size: 13px;
+}
+
+.albumTitleMain {
+  font-size: 65px;
+}
+.albumTitles {
+  font-size: 13px;
+}
+.descriptionAlbum {
+  font-size: 10px;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.iconTop {
+  opacity: 0.5;
+}
+
+.titleBold {
+  font-weight: 700 !important;
+}
+
+.authorDescription {
+  font-size: 11px;
+}
+
+.spotifyColor {
+  background-color: #1ed760 !important;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}

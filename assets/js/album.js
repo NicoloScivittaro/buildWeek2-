@@ -7,6 +7,7 @@ const albumDuration = document.querySelector(".albumDuration");
 const tracksAlbum = document.querySelector(".tracksAlbum");
 const artistImageLittle = document.querySelector(".artistImageLittle");
 const mainColumnAlbum = document.getElementById("mainColumnAlbum");
+const buttonPlay = document.getElementById("buttonPlay");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -18,7 +19,7 @@ const generateTracks = function (TracksArray) {
     newCol.classList.add("col");
     newCol.innerHTML = `
     <div class=" d-flex  align-items-center mb-2"> 
-      <div class="col-1 text-center numberTrack text-light text-opacity-75"><p>${
+      <div class="col-1 text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
         index + 1
       }</p></div>
       <div class="col-5">
@@ -67,20 +68,20 @@ const getAlbumCard = function () {
       artistImageLittle.src = albumArray.artist.picture_small;
       const colorThief = new ColorThief();
       albumImageBig.crossOrigin = "Anonymous";
+      const windowWidth = window.innerWidth;
 
       if (albumImageBig.complete) {
         const color = colorThief.getColor(albumImageBig);
-        // mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-        applyGradient(color);
+        applyGradient(color, windowWidth);
       } else {
         albumImageBig.addEventListener("load", function () {
           const color = colorThief.getColor(albumImageBig);
-          // mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-          applyGradient(color);
+          applyGradient(color, windowWidth);
         });
       }
 
       generateTracks(albumArray.tracks.data);
+      numberTransform();
     })
     .catch((err) => {
       console.error("ERRORE", err);
@@ -89,8 +90,55 @@ const getAlbumCard = function () {
 
 getAlbumCard();
 
-function applyGradient(color) {
+function applyGradient(color, windowWidth) {
   const gradientColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  const gradient = `linear-gradient(to bottom, ${gradientColor} 350px, black 390px)`;
+  let gradient;
+
+  switch (true) {
+    case windowWidth < 576:
+      gradient = `linear-gradient(to bottom, ${gradientColor} 100px, black 150px)`;
+      break;
+    case windowWidth >= 576 && windowWidth < 768:
+      gradient = `linear-gradient(to bottom, ${gradientColor} 200px, black 250px)`;
+      break;
+    case windowWidth >= 768 && windowWidth < 992:
+      gradient = `linear-gradient(to bottom, ${gradientColor} 300px, black 350px)`;
+      break;
+    case windowWidth >= 992 && windowWidth < 1200:
+      gradient = `linear-gradient(to bottom, ${gradientColor} 350px, black 400px)`;
+      break;
+    case windowWidth >= 1200 && windowWidth < 1400:
+      gradient = `linear-gradient(to bottom, ${gradientColor} 380px, black 420px)`;
+      break;
+    case windowWidth >= 1400:
+      gradient = `linear-gradient(to bottom, ${gradientColor} 385px, black 450px)`;
+      break;
+  }
+
   mainColumnAlbum.style.background = gradient;
 }
+const numberTransform = function () {
+  const numberTracks = document.querySelectorAll(".numberTrack");
+
+  numberTracks.forEach((track, index) => {
+    track.addEventListener("mouseover", () => {
+      track.innerHTML = '<i class="bi bi-play-fill"></i>';
+    });
+
+    track.addEventListener("mouseout", () => {
+      track.innerHTML = `<p>${index + 1}</p>`;
+    });
+  });
+};
+
+const icons = document.querySelectorAll(".iconTop");
+
+icons.forEach((icon) => {
+  icon.addEventListener("mouseover", () => {
+    icon.style.opacity = "1";
+  });
+
+  icon.addEventListener("mouseout", () => {
+    icon.style.opacity = "0.5";
+  });
+});
