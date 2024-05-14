@@ -16,6 +16,11 @@ html {
 }
 @media screen and (min-width: 768px) {
   .albumTitleMain {
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .albumTitleMain {
     font-size: 65px;
   }
 }

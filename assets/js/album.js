@@ -20,7 +20,7 @@ const generateTracks = function (TracksArray) {
     newCol.classList.add("col");
     newCol.innerHTML = `
     <div class=" d-flex  align-items-center justify-content-between mb-2"> 
-      <div class="col-1 d-none d-md-block text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
+      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
         index + 1
       }</p></div>
       <div class="col-5">
@@ -34,7 +34,7 @@ const generateTracks = function (TracksArray) {
           </div>
         </div>
       </div>
-      <div class="col-4 d-none d-md-block text-center text-light text-opacity-75">${formattedRank}</div>
+      <div class="col-4 d-none d-lg-block text-center text-light text-opacity-75">${formattedRank}</div>
       <div class="col-2  text-end text-light text-opacity-75 mobileChange">${minutes}:${
       seconds < 10 ? "0" : ""
     }${seconds}</div> 
