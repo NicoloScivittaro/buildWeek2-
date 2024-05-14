@@ -6,6 +6,7 @@ const albumTracks = document.querySelector(".albumTracks");
 const albumDuration = document.querySelector(".albumDuration");
 const tracksAlbum = document.querySelector(".tracksAlbum");
 const artistImageLittle = document.querySelector(".artistImageLittle");
+const mainColumnAlbum = document.getElementById("mainColumnAlbum");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -16,20 +17,21 @@ const generateTracks = function (TracksArray) {
     const newCol = document.createElement("div");
     newCol.classList.add("col");
     newCol.innerHTML = `
-    <div class=" d-flex"> 
+    <div class=" d-flex  align-items-center mb-2"> 
       <div class="col-1 text-center numberTrack"><p>${index + 1}</p></div>
       <div class="col-5">
         <div class="row flex-column">
           <div class="col d-flex text-start p-0">
-            <p>${track.title}</p>
+            <p class="titleBold">${track.title}</p>
           </div>
           <div class="col p-0">
-            <p class="artistAlbum">${track.artist.name}</p>
+            <p class="artistAlbum text-light text-opacity-50 authorDescription
+            ">${track.artist.name}</p>
           </div>
         </div>
       </div>
-      <div class="col-4 text-center">${formattedRank}</div>
-      <div class="col-2 text-end">${minutes}:${
+      <div class="col-4 text-center text-light text-opacity-75">${formattedRank}</div>
+      <div class="col-2 text-end text-light text-opacity-75">${minutes}:${
       seconds < 10 ? "0" : ""
     }${seconds}</div> 
       </div>
@@ -55,9 +57,25 @@ const getAlbumCard = function () {
       titleAlbumBig.innerText = albumArray.title;
       artistAlbum.innerText = albumArray.artist.name;
       releaseAlbum.innerText = albumArray.release_date;
-      albumTracks.innerText = albumArray.nb_tracks;
-      albumDuration.innerText = albumArray.duration;
+      const durataTotaleAlbumSec = albumArray.duration;
+      const durataTotaleAlbumMin = Math.floor(durataTotaleAlbumSec / 60);
+      const durataTotaleAlbumSecRimasti = durataTotaleAlbumSec % 60;
+      const durataTotaleAlbumStringa = `${durataTotaleAlbumMin} min ${durataTotaleAlbumSecRimasti} sec`;
+      albumTracks.innerText = `${albumArray.nb_tracks} brani,  ${durataTotaleAlbumStringa}`;
       artistImageLittle.src = albumArray.artist.picture_small;
+      const colorThief = new ColorThief();
+      albumImageBig.crossOrigin = "Anonymous";
+
+      if (albumImageBig.complete) {
+        const color = colorThief.getColor(albumImageBig);
+        mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+      } else {
+        albumImageBig.addEventListener("load", function () {
+          const color = colorThief.getColor(albumImageBig);
+          mainColumnAlbum.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        });
+      }
+
       generateTracks(albumArray.tracks.data);
     })
     .catch((err) => {
@@ -66,26 +84,3 @@ const getAlbumCard = function () {
 };
 
 getAlbumCard();
-
-const mainColumnAlbum = document.getElementById("mainColumnAlbum");
-
-const colorThief = new ColorThief();
-
-// Verifica se l'immagine è già stata caricata
-if (albumImageBig.complete) {
-  setColorFromImage();
-} else {
-  // Aggiungi un listener per l'evento di caricamento dell'immagine
-  albumImageBig.addEventListener("load", setColorFromImage);
-}
-
-function setColorFromImage() {
-  // Ottieni il colore dominante dall'immagine
-  const dominantColor = colorThief.getColor(albumImageBig);
-
-  // Crea una classe CSS con il colore dominante
-  const colorClass = `color-${dominantColor[0]}-${dominantColor[1]}-${dominantColor[2]}`;
-
-  // Aggiungi la classe al mainColumnAlbum
-  mainColumnAlbum.classList.add(colorClass);
-}
