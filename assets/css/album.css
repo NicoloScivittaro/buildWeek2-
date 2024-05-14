@@ -1,5 +1,7 @@
-body {
+body,
+html {
   font-family: "Montserrat", sans-serif;
+  margin: 0;
 }
 
 .accountImage {
@@ -10,7 +12,12 @@ body {
 }
 
 .albumTitleMain {
-  font-size: 65px;
+  font-size: 25px;
+}
+@media screen and (min-width: 768px) {
+  .albumTitleMain {
+    font-size: 65px;
+  }
 }
 .albumTitles {
   font-size: 13px;

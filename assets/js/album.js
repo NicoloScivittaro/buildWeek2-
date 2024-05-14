@@ -19,12 +19,12 @@ const generateTracks = function (TracksArray) {
     const newCol = document.createElement("div");
     newCol.classList.add("col");
     newCol.innerHTML = `
-    <div class=" d-flex  align-items-center mb-2"> 
-      <div class="col-1 text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
+    <div class=" d-flex  align-items-center justify-content-between mb-2"> 
+      <div class="col-1 d-none d-md-block text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
         index + 1
       }</p></div>
       <div class="col-5">
-        <div class="row flex-column">
+        <div class="row flex-column ">
           <div class="col d-flex text-start p-0">
             <p class="titleBold text-light">${track.title}</p>
           </div>
@@ -34,8 +34,8 @@ const generateTracks = function (TracksArray) {
           </div>
         </div>
       </div>
-      <div class="col-4 text-center text-light text-opacity-75">${formattedRank}</div>
-      <div class="col-2 text-end text-light text-opacity-75">${minutes}:${
+      <div class="col-4 d-none d-md-block text-center text-light text-opacity-75">${formattedRank}</div>
+      <div class="col-2  text-end text-light text-opacity-75 mobileChange">${minutes}:${
       seconds < 10 ? "0" : ""
     }${seconds}</div> 
       </div>
