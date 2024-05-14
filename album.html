@@ -14,7 +14,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+
     <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
+
       .accountImage {
         width: 25px;
       }
@@ -35,6 +44,14 @@
         margin: 0;
         padding: 0;
       }
+
+      .titleBold {
+        font-weight: 700 !important;
+      }
+
+      .authorDescription {
+        font-size: 11px;
+      }
     </style>
   </head>
   <body>
@@ -47,7 +64,7 @@
             quibusdam vitae, repellat, laudantium ex suscipit aut quos deleniti
             perferendis?
           </div>
-          <div class="col-7" id="mainColumnAlbum">
+          <div class="col-7 text-bg-dark" id="mainColumnAlbum">
             <div class="row mt-2">
               <div class="col-12">
                 <div class="row">
@@ -102,7 +119,9 @@
                     <div class="col-md-8 d-flex">
                       <div class="d-flex flex-column justify-content-center">
                         <p class="albumTitles mt-xxl-5">ALBUM</p>
-                        <h1 class="albumTitleMain mb-3 titleAlbumBig"></h1>
+                        <h1
+                          class="albumTitleMain mb-3 titleAlbumBig titleBold"
+                        ></h1>
                         <div
                           class="d-flex flex-row descriptionAlbum align-items-center"
                         >
@@ -111,9 +130,9 @@
                             alt=""
                             class="accountImage rounded-circle me-1 artistImageLittle"
                           />
-                          <p class="card-text me-1 artistAlbum"></p>
-                          <p class="card-text me-1 releaseAlbum"></p>
-                          <p class="card-text me-1 albumTracks"></p>
+                          <p class="card-text me-1 artistAlbum titleBold"></p>
+                          <p class="card-text me-1 releaseAlbum titleBold"></p>
+                          <p class="card-text me-1 albumTracks titleBold"></p>
                           <p class="card-text albumDuration">
                             <small></small>
                           </p>
@@ -161,7 +180,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script src="./assets/js/album.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <script src="./assets/js/album.js"></script>
   </body>
 </html>
