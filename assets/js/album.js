@@ -96,29 +96,23 @@ function applyGradient(color, windowWidth) {
   const gradientColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
   let gradient;
 
-  switch (true) {
-    case windowWidth < 576:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 100px, black 150px)`;
-      break;
-    case windowWidth >= 576 && windowWidth < 768:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 200px, black 250px)`;
-      break;
-    case windowWidth >= 768 && windowWidth < 992:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 300px, black 350px)`;
-      break;
-    case windowWidth >= 992 && windowWidth < 1200:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 350px, black 400px)`;
-      break;
-    case windowWidth >= 1200 && windowWidth < 1400:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 380px, black 420px)`;
-      break;
-    case windowWidth >= 1400:
-      gradient = `linear-gradient(to bottom, ${gradientColor} 340px, black 450px)`;
-      break;
+  if (windowWidth < 576) {
+    gradient = `linear-gradient(to bottom, ${gradientColor} 525px, black 600px)`;
+  } else if (windowWidth >= 576 && windowWidth < 768) {
+    gradient = `linear-gradient(to bottom, ${gradientColor} 680px, black 740px)`;
+  } else if (windowWidth >= 768 && windowWidth < 992) {
+    gradient = `linear-gradient(to bottom, ${gradientColor} 190px, black 300px)`;
+  } else if (windowWidth >= 992 && windowWidth < 1200) {
+    gradient = `linear-gradient(to bottom, ${gradientColor} 285px, black 380px)`;
+  } else if (windowWidth >= 1200 && windowWidth < 1400) {
+    gradient = `linear-gradient(to bottom, ${gradientColor} 380px, black 420px)`;
+  } else {
+    gradient = `linear-gradient(to bottom, ${gradientColor} 380px, black 460px)`;
   }
 
   mainColumnAlbum.style.background = gradient;
 }
+
 function applyTextColor(color) {
   const backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
   const textColor =
@@ -157,5 +151,12 @@ icons.forEach((icon) => {
 
   icon.addEventListener("mouseout", () => {
     icon.style.opacity = "0.5";
+  });
+});
+
+const buttonsIndietro = document.querySelectorAll(".buttonIndietro");
+buttonsIndietro.forEach((button) => {
+  button.addEventListener("click", () => {
+    window.location.href = "index.html";
   });
 });
