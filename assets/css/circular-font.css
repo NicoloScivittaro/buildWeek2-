@@ -78,12 +78,14 @@ body {
 }
 
 aside a,
-ul li {
+ul li,
+footer li a {
   transition: all 0.2s ease;
   color: #a5a5a4cb !important;
 }
 
-aside a:hover {
+aside a:hover,
+footer li a:hover {
   color: #e4e4dccb !important;
 }
 
@@ -106,6 +108,10 @@ aside a:hover {
 #artist-list:hover {
   background-color: rgb(211, 211, 211, 0.1);
   cursor: pointer;
+}
+
+.card {
+  transition: all 0.2s ease;
 }
 
 .card:hover {
