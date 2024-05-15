@@ -39,104 +39,98 @@
   
   </head>
   <body style="background-color:#202020;">
-    <div class="container-fluid px-0">
-      <div class="row">
-
-
-
-        <aside class="col-3 d-none d-md-block  bg-black vh-100 overflow-hidden ">
-          <div class="pt-2 ps-1">
-            <a href="#"><i class="bi bi-three-dots fs-3 text-light"></i></a>
-          </div>
-          <section class="p-2 pt-0">
-          <nav>
-            <ul class="d-flex flex-column gap-2 list-unstyled">
-              <li>
-                <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-house-door-fill fs-5 pe-3"></i> Home</a>
-              </li>
-              <li>
-                <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-search fs-5 pe-3"></i> Cerca</a>
-              </li>
-              <li>
-                <a href="#" class=" link-underline link-underline-opacity-0"
-                  ><i class="bi bi-collection fs-5 pe-3"></i> La tua libreria</a>
-              </li>
-            </ul>
-          </nav>
-        </section>
-        <section class="p-2 border-dark border-bottom ">
-          <nav>
-            <ul class="d-flex flex-column gap-2 list-unstyled">
-              <li>
-                <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-plus-square-fill fs-5 pe-3 "></i></i> Crea playlist</a>
-              </li>
-              <li>
-                <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-heart fs-5 pe-3"></i> Brani che ti piacciono</a>
-              </li>
-              <li>
-                <a href="#" class=" link-underline link-underline-opacity-0"
-                  ><i class="bi bi-bookmark-fill fs-5 pe-3"></i> I tuoi episodi</a
-                >
-              </li>
-            </ul>
-          </nav>
-        </section>
-        <section class="h-100">
-          <div class="py-3 overflow-y-scroll h-100 " id="scrollbar">
-            <ul id="random-songs" class="list-group list-unstyled d-flex flex-column gap-0">
-            </ul>
-          </div>
-        </section>
-      </aside>
-
-
-
-
-
-
-      <div class="col-12 col-sm-9 offset-sm-2 offset-md-0 col-lg-7 overflow-y-scroll vh-100 px-2 mx-0" id="center">
-          <!--Navbar-->
-          <div class="row mt-2 justify-content-between pb-3 w-100 " id="navbar">
-            <div class="col-3 d-flex align-items-center">
-              <button class="text-white-50 rounded-circle border-0 d-flex justify-content-center align-items-center me-2" style="background-color: #131313; width: 40px; height: 40px;">
-                  <i class="bi bi-chevron-left"></i>
-              </button>
-              <button class="text-white-50 rounded-circle border-0 d-flex justify-content-center align-items-center" style="background-color: #131313; width: 40px; height: 40px;">
-                  <i class="bi bi-chevron-right"></i>
-              </button>
-            </div>
-            <div class="col-9 d-flex justify-content-end align-items-center" id="col9">
-              <button class="text-white-50 fs-4 border-0 me-3 d-none d-sm-block " style="background-color:#202020;" id="buttonIscriviti">Iscriviti</button>
-              <div class="dropdown" id="buttonAccedi">
-                <button type="button" class="text-dark fs-5 bg-white fw-bolder px-4 py-2 rounded-5" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                  Accedi
-                </button>
-                <form class="dropdown-menu p-4"  style="width: 300px;">
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="email@example.com">
-                  </div>
-                  <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn bg-dark text-white" onclick="event.preventDefault(); login();" >Login</button>
-                </form>
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+          <aside class="col-3 d-none d-md-block  bg-black vh-100 overflow-hidden ">
+              <div class="pt-2 ps-1">
+                <a href="#"><i class="bi bi-three-dots fs-3 text-light"></i></a>
               </div>
-              <div class="btn-group d-none" id="buttonLogged">
-                <button class="bg-black d-flex flex-row text-white rounded-5 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="./assets/imgs/search/image-31.jpg" alt="immagine profile" class="rounded-circle " style="width:20px">    
-                  <p class="mb-0 ms-2 text-white">NameAccount...</p>
-                  <i class="bi bi-caret-down-fill fs-6"></i>
-                </button>
-                <ul class="dropdown-menu bg-dark">
-                  <li><a class="dropdown-item text-white hover" href="#">Account</a></li>
-                  <li><a class="dropdown-item text-white hover" href="#">Profilo</a></li>
-                  <li><a class="dropdown-item text-white hover" href="#">Impostazioni</a></li>     
+              <section class="p-0">
+              <nav>
+                <ul class="d-flex flex-column gap-2 list-unstyled">
+                  <li>
+                    <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-house-door-fill fs-5 p-2"></i> Home</a>
+                  </li>
+                  <li>
+                    <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-search fs-5 p-2"></i> Cerca</a>
+                  </li>
+                  <li>
+                    <a href="#" class=" link-underline link-underline-opacity-0"
+                      ><i class="bi bi-collection fs-5 p-2"></i> La tua libreria</a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+            <section class="p-0 py-2  border-dark border-bottom ">
+              <nav>
+                <ul class="d-flex flex-column gap-2 list-unstyled">
+                  <li>
+                    <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-plus-square-fill fs-5 p-2 "></i></i> Crea playlist</a>
+                  </li>
+                  <li>
+                    <a href="#" class=" link-underline link-underline-opacity-0"><span class="rounded-1 d-inline-block" id="heart-colored"><i class="bi bi-heart-fill fs-5 p-2"></i></span> Brani che ti piacciono</a>
+                  </li>
+                  <li>
+                    <a href="#" class=" link-underline link-underline-opacity-0"
+                      ><span class=" rounded-1 d-inline-block" id="green-bookmark"><i class="bi bi-bookmark-fill fs-5 p-2"></i></span> I tuoi episodi</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </section>
+            <section class="h-100">
+              <div class="py-3 overflow-y-scroll h-100 " id="scrollbar">
+                <ul id="random-songs" class="list-group list-unstyled d-flex flex-column gap-0">
                 </ul>
               </div>
-            </div>
-          </div>
+            </section>
+          </aside>
+          <div class="col-12 col-sm-9 offset-sm-2 offset-md-0 col-lg-7 overflow-y-scroll vh-100 px-5 " id="center">
+
+                      <!--Navbar-->
+
+                      <div class="row mt-2 justify-content-between pb-3 w-100 " id="navbar">
+                        <div class="col-3 d-flex align-items-center">
+                          <button class="text-white-50 rounded-circle border-0 d-flex justify-content-center align-items-center me-2" style="background-color: #131313; width: 40px; height: 40px;">
+                              <i class="bi bi-chevron-left"></i>
+                          </button>
+                          <button class="text-white-50 rounded-circle border-0 d-flex justify-content-center align-items-center" style="background-color: #131313; width: 40px; height: 40px;">
+                              <i class="bi bi-chevron-right"></i>
+                          </button>
+                        </div>
+                        <div class="col-9 d-flex justify-content-end align-items-center" id="col9">
+                          <button class="text-white-50 fs-4 border-0 me-3 d-none d-sm-block " style="background-color:#202020;" id="buttonIscriviti">Iscriviti</button>
+                          <div class="dropdown" id="buttonAccedi">
+                            <button type="button" class="text-dark fs-5 bg-white fw-bolder px-4 py-2 rounded-5" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                              Accedi
+                            </button>
+                            <form class="dropdown-menu p-4"  style="width: 300px;">
+                              <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" placeholder="email@example.com">
+                              </div>
+                              <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                              </div>
+                              <button type="submit" class="btn bg-dark text-white" onclick="event.preventDefault(); login();" >Login</button>
+                            </form>
+                          </div>
+                          <div class="btn-group d-none" id="buttonLogged">
+                            <button class="bg-black d-flex flex-row text-white rounded-5 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src="./assets/imgs/search/image-31.jpg" alt="immagine profile" class="rounded-circle " style="width:20px">    
+                              <p class="mb-0 ms-2 text-white">NameAccount...</p>
+                              <i class="bi bi-caret-down-fill fs-6"></i>
+                            </button>
+                            <ul class="dropdown-menu bg-dark">
+                              <li><a class="dropdown-item text-white hover" href="#">Account</a></li>
+                              <li><a class="dropdown-item text-white hover" href="#">Profilo</a></li>
+                              <li><a class="dropdown-item text-white hover" href="#">Impostazioni</a></li>     
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
 
           <!--album  random -->
           <div class="row mb-3 bg-black py-3">
