@@ -112,3 +112,13 @@ aside a:hover {
   background-color: rgba(58, 57, 57, 0.336) !important;
   cursor: pointer;
 }
+
+#green-bookmark {
+  background-color: #00644f;
+  color: #1dd35e;
+}
+
+#heart-colored {
+  background: linear-gradient(148deg, #5e35ed, #b5dad2);
+  color: white;
+}
