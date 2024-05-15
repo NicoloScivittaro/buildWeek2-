@@ -1,0 +1,62 @@
+body,
+html {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
+.accountImage {
+  width: 25px;
+}
+.fontAccount {
+  font-size: 13px;
+}
+
+.albumTitleMain {
+  font-size: 25px;
+}
+@media screen and (min-width: 768px) {
+  .albumTitleMain {
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .albumTitleMain {
+    font-size: 65px;
+  }
+}
+.albumTitles {
+  font-size: 13px;
+}
+.descriptionAlbum {
+  font-size: 10px;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.iconTop {
+  opacity: 0.5;
+}
+
+.titleBold {
+  font-weight: 700 !important;
+}
+
+.authorDescription {
+  font-size: 11px;
+}
+
+.spotifyColor {
+  background-color: #1ed760 !important;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+#navbarAlbum {
+  width: 58%;
+  background-color: black;
+  z-index: 3;
+}

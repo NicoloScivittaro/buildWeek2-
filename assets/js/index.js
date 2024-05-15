@@ -86,10 +86,12 @@ function login() {
 
   let emailForm = document.getElementById("email");
   let passwordForm = document.getElementById("password");
+  
 
   const buttonIscriviti = document.getElementById("buttonIscriviti");
   const buttonAccedi = document.getElementById("buttonAccedi");
   const buttonLogged = document.getElementById("buttonLogged");
+
 
   if (emailForm.value == email && passwordForm.value == password) {
     buttonIscriviti.classList.remove("d-sm-block");
