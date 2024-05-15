@@ -123,76 +123,49 @@ aside a:hover {
   color: white;
 }
 
-
-  .slider {
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  background-color: green !important;
-} */
-
-  .slider {
-  -webkit-appearance: slider-horizontal;
-  width: 100%;
-  height: 25px;
-  background: green !important;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  
-} 
-
 .slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 5px;
-  background: white; 
+  height: 4px;
+  background: white; /* Colore iniziale dello slider */
   outline: none;
   opacity: 0.7;
-  transition: background 0.3s; 
-  border-radius: 10px
+  transition: background 0.3s; /* Transizione del colore di sfondo */
+  border-radius: 10px;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
-  background: white;
+  width: 13px;
+  height: 13px;
+  background: white; /* Colore iniziale del thumb */
   cursor: pointer;
-  opacity: 0; 
-  border-radius: 10px
+  opacity: 0; /* Thumb inizialmente non visibile */
+  border-radius: 10px;
 }
 
 .slider:hover {
-  background: #1DB954; 
+  background: #1db954; /* Colore di sfondo durante l'hover */
 }
 
 .slider:hover::-webkit-slider-thumb {
-  opacity: 1; 
+  opacity: 1; /* Thumb visibile durante l'hover */
 }
-
 
 /* Sovrascrive il colore predefinito delle icone al passaggio del mouse */
 .text-decoration-none:hover .bi {
   color: white !important; /* Colore bianco con importanza */
 }
 
-
 #provatre {
-  transition: all 0.0s linear !important;
+  transition: all 0s linear !important;
 }
 
 #provatre:hover {
   transform: scale(1.4) translate(0px, 2%) !important;
 }
-    
-  .hover_heart:hover {
-    color: white !important;
-  }
 
+.hover_heart:hover {
+  color: white !important;
+}
