@@ -227,5 +227,6 @@ mainColumnAlbum.addEventListener("scroll", () => {
   } else {
     buttonPlayNavbar.classList.remove("displayNone");
     TitleSong.classList.remove("displayNone");
+    buttonBack.style.display = "block";
   }
 });
