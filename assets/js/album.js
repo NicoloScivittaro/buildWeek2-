@@ -20,9 +20,9 @@ const generateTracks = function (TracksArray) {
     const formattedRank = track.rank.toLocaleString();
 
     const newCol = document.createElement("div");
-    newCol.classList.add("col");
+    newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
-    <div class=" d-flex  align-items-center justify-content-between mb-2"> 
+    <div class=" d-flex  align-items-center justify-content-between mb-2 divTrack cursorPointer"> 
       <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
         index + 1
       }</p></div>
@@ -90,6 +90,19 @@ const getAlbumCard = function () {
       generateTracks(albumArray.tracks.data);
       TitleSong.innerText = albumArray.title;
       numberTransform();
+      let currentAudio = null;
+      const divTracks = document.querySelectorAll(".divTrack");
+      divTracks.forEach((divTrack, index) => {
+        divTrack.addEventListener("click", () => {
+          const previewUrl = albumArray.tracks.data[index].preview;
+          if (currentAudio) {
+            currentAudio.pause();
+          }
+          const audio = new Audio(previewUrl);
+          audio.play();
+          currentAudio = audio;
+        });
+      });
     })
     .catch((err) => {
       console.error("ERRORE", err);
@@ -191,8 +204,6 @@ mainColumnAlbum.addEventListener("scroll", () => {
     buttonPlayNavbar.classList.add("displayNone");
     TitleSong.classList.add("displayNone");
   } else {
-    buttonBack.style.display = "flex";
-
     buttonPlayNavbar.classList.remove("displayNone");
     TitleSong.classList.remove("displayNone");
   }
