@@ -10,6 +10,8 @@ const mainColumnAlbum = document.getElementById("mainColumnAlbum");
 const buttonPlay = document.getElementById("buttonPlay");
 const albumHero = document.querySelector(".albumHero");
 const navbarAlbum = document.getElementById("navbarAlbum");
+const colorChange = document.querySelectorAll("colorChange");
+const TitleSong = document.getElementById("TitleSong");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -86,6 +88,7 @@ const getAlbumCard = function () {
       }
 
       generateTracks(albumArray.tracks.data);
+      TitleSong.innerText = albumArray.title;
       numberTransform();
     })
     .catch((err) => {
@@ -114,6 +117,7 @@ function applyGradient(color, windowWidth) {
   }
 
   mainColumnAlbum.style.background = gradient;
+  mainColumnAlbum.style.backgroundAttachment = "fixed";
 }
 
 function applyTextColor(color) {
@@ -173,4 +177,23 @@ buttonsIndietro.forEach((button) => {
   button.addEventListener("click", () => {
     window.location.href = "index.html";
   });
+});
+
+mainColumnAlbum.addEventListener("scroll", () => {
+  const buttonBack = document.getElementById("dinamicScroll");
+
+  const buttonPlayNavbar = document.getElementById("buttonPlayNavbar");
+  const scrollHeight = 250;
+
+  if (mainColumnAlbum.scrollTop > scrollHeight) {
+    buttonBack.style.display = "none";
+
+    buttonPlayNavbar.classList.add("displayNone");
+    TitleSong.classList.add("displayNone");
+  } else {
+    buttonBack.style.display = "flex";
+
+    buttonPlayNavbar.classList.remove("displayNone");
+    TitleSong.classList.remove("displayNone");
+  }
 });

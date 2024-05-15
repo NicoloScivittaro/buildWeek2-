@@ -20,71 +20,101 @@
     />
 
     <link rel="stylesheet" href="./assets/css/album.css" />
-    <link rel="stylesheet" href="./assets/css/circular-font.css">
+    <link rel="stylesheet" href="./assets/css/circular-font.css" />
   </head>
   <body>
     <main class="vh-100">
       <div class="container-fluid m-0">
         <div class="row justify-content-between">
-            <aside class="col-3 d-none d-md-block  bg-black vh-100 overflow-hidden ">
-              <div class="pt-2 ps-1">
-                <a href="#"><i class="bi bi-three-dots fs-3 text-light"></i></a>
-              </div>
-              <section class="p-0">
+          <aside
+            class="col-3 d-none d-md-block bg-black vh-100 overflow-hidden"
+          >
+            <div class="pt-2 ps-1">
+              <a href="#"><i class="bi bi-three-dots fs-3 text-light"></i></a>
+            </div>
+            <section class="p-0">
               <nav>
                 <ul class="d-flex flex-column gap-2 list-unstyled">
                   <li>
-                    <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-house-door-fill fs-5 p-2"></i> Home</a>
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-house-door-fill fs-5 p-2"></i> Home</a
+                    >
                   </li>
                   <li>
-                    <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-search fs-5 p-2"></i> Cerca</a>
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-search fs-5 p-2"></i> Cerca</a
+                    >
                   </li>
                   <li>
-                    <a href="#" class=" link-underline link-underline-opacity-0"
-                      ><i class="bi bi-collection fs-5 p-2"></i> La tua libreria</a>
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-collection fs-5 p-2"></i> La tua
+                      libreria</a
+                    >
                   </li>
                 </ul>
               </nav>
             </section>
-            <section class="p-0 py-2  border-dark border-bottom ">
+            <section class="p-0 py-2 border-dark border-bottom">
               <nav>
                 <ul class="d-flex flex-column gap-2 list-unstyled">
                   <li>
-                    <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-plus-square-fill fs-5 p-2 "></i></i> Crea playlist</a>
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-plus-square-fill fs-5 p-2"></i> Crea
+                      playlist</a
+                    >
                   </li>
                   <li>
-                    <a href="#" class=" link-underline link-underline-opacity-0"><span class="rounded-1 d-inline-block" id="heart-colored"><i class="bi bi-heart-fill fs-5 p-2"></i></span> Brani che ti piacciono</a>
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><span class="rounded-1 d-inline-block" id="heart-colored"
+                        ><i class="bi bi-heart-fill fs-5 p-2"></i
+                      ></span>
+                      Brani che ti piacciono</a
+                    >
                   </li>
                   <li>
-                    <a href="#" class=" link-underline link-underline-opacity-0"
-                      ><span class=" rounded-1 d-inline-block" id="green-bookmark"><i class="bi bi-bookmark-fill fs-5 p-2"></i></span> I tuoi episodi</a
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><span
+                        class="rounded-1 d-inline-block"
+                        id="green-bookmark"
+                        ><i class="bi bi-bookmark-fill fs-5 p-2"></i
+                      ></span>
+                      I tuoi episodi</a
                     >
                   </li>
                 </ul>
               </nav>
             </section>
             <section class="h-100">
-              <div class="py-3 overflow-y-scroll h-100 " id="scrollbar">
-                <ul id="random-songs" class="list-group list-unstyled d-flex flex-column gap-0">
-                </ul>
+              <div class="py-3 overflow-y-scroll h-100" id="scrollbar">
+                <ul
+                  id="random-songs"
+                  class="list-group list-unstyled d-flex flex-column gap-0"
+                ></ul>
               </div>
             </section>
           </aside>
-          <div class="col-12 col-md-9 col-lg-7 overflow-y-scroll vh-100 px-5" id="mainColumnAlbum">
+          <div
+            class="col-12 col-md-9 col-lg-7 overflow-y-auto vh-100 px-5"
+            id="mainColumnAlbum"
+          >
             <div class="row mt-2">
               <div class="col-12">
-                <div class="row position-fixed top-0 p-2" id="navbarAlbum">
+                <div class="row position-fixed top-0 p-1" id="navbarAlbum">
                   <div class="col d-flex">
                     <button
                       class="rounded-circle text-bg-secondary border-0 bg-opacity-50 buttonIndietro"
+                      id="dinamicScroll"
                     >
                       <i class="bi bi-chevron-left"></i>
                     </button>
+
                     <button
-                      class="rounded-circle text-bg-secondary border-0 bg-opacity-50 d-none d-lg-block"
+                      class="d-none rounded-circle spotifyColor border-1"
+                      id="buttonPlayNavbar"
                     >
-                      <i class="bi bi-chevron-right"></i>
+                      <i class="ps-1 bi bi-play-fill fs-4"></i>
                     </button>
+                    <p class="ms-1 mt-2 d-none" id="TitleSong"></p>
                   </div>
                   <div class="col d-flex justify-content-end">
                     <div class="dropdown">
@@ -159,7 +189,7 @@
                 class="col-12 col-lg-3 d-flex justify-content-between justify-content-md-center align-items-md-center align-items-center justify-content-md-evenly align-items-md-center mt-3"
               >
                 <button
-                  class="rounded-circle spotifyColor border-1 order-4 order-md-1"
+                  class="rounded-circle spotifyColor border-1 order-4 order-md-1 pt-1"
                   id="buttonPlay"
                 >
                   <i class="ps-1 bi bi-play-fill fs-4"></i>
@@ -179,7 +209,7 @@
               </div>
             </div>
             <div
-              class="row d-none d-lg-flex mt-3 pb-1 mx-3 albumTitles border-bottom b-1 border-secondary position-sticky top-2 z-3"
+              class="row d-none d-lg-flex pb-1 mx-3 albumTitles border-bottom b-1 border-secondary mt-3"
               style="top: 56px"
             >
               <div class="col-1 text-end pe-4 text-light"><p>#</p></div>
@@ -191,74 +221,136 @@
                 <i class="bi bi-clock text-light"></i>
               </div>
             </div>
+
             <div
               class="row albumTitles mx-3 mt-2 align-items-center tracksAlbum flex-column"
             ></div>
           </div>
-          <aside class="col-2 d-none d-lg-block  bg-black vh-100 p-0 ">
+          <aside class="col-2 d-none d-lg-block bg-black vh-100 p-0">
             <div class="p-3">
-               <section class="pt-2 ps-2">
-              <div class="d-flex justify-content-between align-items-center  ">
-              <h5 class="text-light ">Attività amici</h5>
-              <div class="d-flex gap-3">
-                <a href="#" class="text-secondary fs-5"><i class="bi bi-person-plus"></i></a>
-                <a href="#" class="text-secondary fs-5"><i class="bi bi-x-lg"></i></i></a>
-              </div>
-            </div>
-          </section>
-          <section class="ps-xl-2 pt-4 ps-lg-0">
-            <div class="d-flex text-secondary justify-content-between pt-3 ">
-              <div class="d-flex gap-4  ">
-                <a href="#" class=" link-underline link-underline-opacity-0 "><i class="bi bi-person-circle fs-3 "></i></a>
-                <div class="d-flex flex-column small ">
-                  <a href="#" class=" link-underline link-underline-opacity-0 "><h6>Charlie Hookham</h6></a>
-                  <span class="d-flex ">
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p class="mb-0 small ">In Camera</p></a>
-                    <i class="bi bi-dot"></i>
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p class="mb-0 small">Yumi Zourna</p></a>
-                  </span>
-                  <span class="d-flex gap-1">
-                    <i class="bi bi-circle"></i> 
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p>EP III</p></a>
-                  </span>
+              <section class="pt-2 ps-2">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-light">Attività amici</h5>
+                  <div class="d-flex gap-3">
+                    <a href="#" class="text-secondary fs-5"
+                      ><i class="bi bi-person-plus"></i
+                    ></a>
+                    <a href="#" class="text-secondary fs-5"
+                      ><i class="bi bi-x-lg"></i
+                    ></a>
+                  </div>
                 </div>
-              </div>
-              <div><p class="time d-none d-xl-block ">4 ore</p></div>
-            </div>
-            <div class="d-flex text-secondary justify-content-between pt-3 ">
-              <div class="d-flex gap-4 ">
-                <a href="#" class=" link-underline link-underline-opacity-0 "><i class="bi bi-person-circle fs-3 "></i></a>
-                <div class="d-flex flex-column small ">
-                  <a href="#" class=" link-underline link-underline-opacity-0 "><h6>lightdark02</h6></a>
-                  <span class="d-flex ">
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p class="mb-0 small">Aimed to Kill</p></a>
-                    <i class="bi bi-dot"></i>
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p class="mb-0 small">Jade LeMac</p></a>
-                  </span>
-                  <span class="d-flex gap-1 small"><i class="bi bi-circle"></i> <a href="#" class=" link-underline link-underline-opacity-0 "><p>Aimed to Kill</p></a></span>
+              </section>
+              <section class="ps-xl-2 pt-4 ps-lg-0">
+                <div class="d-flex text-secondary justify-content-between pt-3">
+                  <div class="d-flex gap-4">
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-person-circle fs-3"></i
+                    ></a>
+                    <div class="d-flex flex-column small">
+                      <a
+                        href="#"
+                        class="link-underline link-underline-opacity-0"
+                        ><h6>Charlie Hookham</h6></a
+                      >
+                      <span class="d-flex">
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p class="mb-0 small">In Camera</p></a
+                        >
+                        <i class="bi bi-dot"></i>
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p class="mb-0 small">Yumi Zourna</p></a
+                        >
+                      </span>
+                      <span class="d-flex gap-1">
+                        <i class="bi bi-circle"></i>
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p>EP III</p></a
+                        >
+                      </span>
+                    </div>
+                  </div>
+                  <div><p class="time d-none d-xl-block">4 ore</p></div>
                 </div>
-              </div>
-              <div><p class="time d-none d-xl-block ">8 ore</p></div>
-            </div>
-            <div class="d-flex text-secondary justify-content-between pt-3 ">
-              <div class="d-flex gap-4 ">
-                <a href="#" class=" link-underline link-underline-opacity-0"><i class="bi bi-person-circle fs-3 "></i></a>
-                <div class="d-flex flex-column small ">
-                  <a href="#" class=" link-underline link-underline-opacity-0 "><h6>Valeria Traverso</h6></a>
-                  <span class="d-flex ">
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p class="mb-0 small">New Kings</p></a>
-                    <i class="bi bi-dot"></i>
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p class="mb-0 small">Sleeping Wolf</p></a>
-                  </span>
-                  <span class="d-flex gap-1">
-                    <i class="bi bi-music-note-beamed"></i> 
-                    <a href="#" class=" link-underline link-underline-opacity-0 "><p>Twist Badass mood</p></a>
-                  </span>
+                <div class="d-flex text-secondary justify-content-between pt-3">
+                  <div class="d-flex gap-4">
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-person-circle fs-3"></i
+                    ></a>
+                    <div class="d-flex flex-column small">
+                      <a
+                        href="#"
+                        class="link-underline link-underline-opacity-0"
+                        ><h6>lightdark02</h6></a
+                      >
+                      <span class="d-flex">
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p class="mb-0 small">Aimed to Kill</p></a
+                        >
+                        <i class="bi bi-dot"></i>
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p class="mb-0 small">Jade LeMac</p></a
+                        >
+                      </span>
+                      <span class="d-flex gap-1 small"
+                        ><i class="bi bi-circle"></i>
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p>Aimed to Kill</p></a
+                        ></span
+                      >
+                    </div>
+                  </div>
+                  <div><p class="time d-none d-xl-block">8 ore</p></div>
                 </div>
-              </div>
-              <div><p class="time d-none d-xl-block ">3 giorni</p></div>
-            </div>
-            </section>
+                <div class="d-flex text-secondary justify-content-between pt-3">
+                  <div class="d-flex gap-4">
+                    <a href="#" class="link-underline link-underline-opacity-0"
+                      ><i class="bi bi-person-circle fs-3"></i
+                    ></a>
+                    <div class="d-flex flex-column small">
+                      <a
+                        href="#"
+                        class="link-underline link-underline-opacity-0"
+                        ><h6>Valeria Traverso</h6></a
+                      >
+                      <span class="d-flex">
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p class="mb-0 small">New Kings</p></a
+                        >
+                        <i class="bi bi-dot"></i>
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p class="mb-0 small">Sleeping Wolf</p></a
+                        >
+                      </span>
+                      <span class="d-flex gap-1">
+                        <i class="bi bi-music-note-beamed"></i>
+                        <a
+                          href="#"
+                          class="link-underline link-underline-opacity-0"
+                          ><p>Twist Badass mood</p></a
+                        >
+                      </span>
+                    </div>
+                  </div>
+                  <div><p class="time d-none d-xl-block">3 giorni</p></div>
+                </div>
+              </section>
             </div>
           </aside>
         </div>

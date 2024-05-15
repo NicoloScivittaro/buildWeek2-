@@ -59,8 +59,11 @@ p {
   width: 100%;
   z-index: 3;
 }
-  @media screen and (min-width: 768px) {   
-    #navbarAlbum {
-      width: 58%;s
-    }
+@media screen and (min-width: 768px) {
+  #navbarAlbum {
+    width: 53%;
   }
+}
+.displayNone {
+  display: flex !important;
+}
