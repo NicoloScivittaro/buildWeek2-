@@ -23,7 +23,7 @@ const generateTracks = function (TracksArray) {
     newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
     <div class=" d-flex  align-items-center justify-content-between mb-2 divTrack cursorPointer"> 
-      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
+      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75 "><p>${
         index + 1
       }</p></div>
       <div class="col-5">
@@ -32,8 +32,10 @@ const generateTracks = function (TracksArray) {
             <p class="titleBold text-light">${track.title}</p>
           </div>
           <div class="col p-0">
-            <p class="artistAlbum text-light text-opacity-75 authorDescription
-            ">${track.artist.name}</p>
+            <a  href="artist.html?artistId=${
+              track.artist.id
+            }" class="artistAlbum text-light text-opacity-75 authorDescription
+            ">${track.artist.name}</a>
           </div>
         </div>
       </div>
@@ -76,7 +78,7 @@ const getAlbumCard = function () {
       if (albumImageBig.complete) {
         const color = colorThief.getColor(albumImageBig);
         applyGradient(color, windowWidth);
-        applyTextColor(color);
+        applyTextColor(color); // chroma
         applyNavbarColor(color);
       } else {
         albumImageBig.addEventListener("load", function () {
@@ -91,16 +93,24 @@ const getAlbumCard = function () {
       TitleSong.innerText = albumArray.title;
       numberTransform();
       let currentAudio = null;
-      const divTracks = document.querySelectorAll(".divTrack");
+      const divTracks = document.querySelectorAll(".divTracks");
       divTracks.forEach((divTrack, index) => {
-        divTrack.addEventListener("click", () => {
+        divTrack.addEventListener("dblclick", () => {
           const previewUrl = albumArray.tracks.data[index].preview;
-          if (currentAudio) {
-            currentAudio.pause();
+          if (currentAudio && currentAudio.src === previewUrl) {
+            if (currentAudio.paused) {
+              currentAudio.play();
+            } else {
+              currentAudio.pause();
+            }
+          } else {
+            if (currentAudio) {
+              currentAudio.pause();
+            }
+            const audio = new Audio(previewUrl);
+            audio.play();
+            currentAudio = audio;
           }
-          const audio = new Audio(previewUrl);
-          audio.play();
-          currentAudio = audio;
         });
       });
     })

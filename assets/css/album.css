@@ -77,3 +77,7 @@ p {
   /* Cambia il colore di sfondo in grigio */
   background-color: #726c6c; /* Puoi personalizzare il colore qui */
 }
+
+a {
+  text-decoration: none !important;
+}
