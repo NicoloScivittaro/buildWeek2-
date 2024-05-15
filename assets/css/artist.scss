@@ -168,10 +168,10 @@ z-index: 100;
     }
   }
   .tit{
-    font-size: 15px;
+    font-size: 20px;
   }
   .text1{
-    font-size: 8px;
+    font-size: 12px;
     img{
         width: 20px;
     }
@@ -179,4 +179,15 @@ z-index: 100;
 #bctp{
     border-radius: 50%;
     border:none
+}
+.artist-info {
+    background: rgba(0, 0, 0, 0.5); /* Optional: adds a dark overlay to improve text readability */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Ensure scrollable content within the specific section */
+.container-fluid[style] {
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto;
 }
