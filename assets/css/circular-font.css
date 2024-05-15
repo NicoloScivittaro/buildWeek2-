@@ -166,3 +166,23 @@ aside a:hover {
 .slider:hover::-webkit-slider-thumb {
   opacity: 1; 
 }
+
+
+/* Sovrascrive il colore predefinito delle icone al passaggio del mouse */
+.text-decoration-none:hover .bi {
+  color: white !important; /* Colore bianco con importanza */
+}
+
+
+#provatre {
+  transition: all 0.0s linear !important;
+}
+
+#provatre:hover {
+  transform: scale(1.4) translate(0px, 2%) !important;
+}
+    
+  .hover_heart:hover {
+    color: white !important;
+  }
+
