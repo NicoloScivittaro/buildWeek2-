@@ -56,7 +56,11 @@ p {
 }
 
 #navbarAlbum {
-  width: 58%;
-  background-color: black;
+  width: 100%;
   z-index: 3;
 }
+  @media screen and (min-width: 768px) {   
+    #navbarAlbum {
+      width: 58%;s
+    }
+  }
