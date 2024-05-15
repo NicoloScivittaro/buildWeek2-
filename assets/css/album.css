@@ -83,12 +83,7 @@ a {
 }
 
 #TitleSong {
-  font-size: 12px;
-}
-@media screen and (min-width: 768px) {
-  #TitleSong {
-    font-size: 10px;
-  }
+  font-size: 10px;
 }
 
 @media screen and (min-width: 1400px) {
