@@ -1,6 +1,7 @@
 * {
   font-family: "Circular", sans-serif;
 }
+
 @font-face {
   font-family: "Circular";
   src: url(../fonts/CircularStd-Light.otf);
@@ -71,7 +72,43 @@
 body {
   background-color: #202020;
 }
-aside a {
-  color: secondary;
+
+.time {
+  color: #a5a5a4cb !important;
+}
+
+aside a,
+ul li {
   transition: all 0.2s ease;
+  color: #a5a5a4cb !important;
+}
+
+aside a:hover {
+  color: #e4e4dccb !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(211, 211, 211, 0.3);
+}
+
+#scrollbar {
+  scrollbar-width: none;
+}
+
+#scrollbar:hover {
+  scrollbar-width: auto;
+}
+
+#artist-list:hover {
+  background-color: rgb(211, 211, 211, 0.1);
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgba(58, 57, 57, 0.336) !important;
+  cursor: pointer;
 }

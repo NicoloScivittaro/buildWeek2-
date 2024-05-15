@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -129,4 +133,60 @@ main {
 
 #artista1 {
   color: white;
+}
+
+#navbar {
+  z-index: 100;
+}
+
+#profilo {
+  margin-left: 120px;
+  background-color: transparent;
+  border: none;
+}
+
+#princ {
+  color: white !important;
+}
+
+.track-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.track-list .track-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+.track-list .track-item:last-child {
+  border-bottom: none;
+}
+.track-list .track-item .track-image {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+}
+.track-list .track-item .track-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.tit {
+  font-size: 15px;
+}
+
+.text1 {
+  font-size: 8px;
+}
+.text1 img {
+  width: 20px;
+}
+
+#bctp {
+  border-radius: 50%;
+  border: none;
 }/*# sourceMappingURL=artist.css.map */

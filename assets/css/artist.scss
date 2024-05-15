@@ -1,6 +1,8 @@
 // Variabili
 $img-height: 55vh; // Altezza dell'immagine
-
+body{
+    margin: 0;
+}
 // Bottoni freccia
 .button-container {
     display: flex;
@@ -124,4 +126,57 @@ border:1px solid gray;
 }
 #artista1{
     color: white;
+}
+#navbar {
+z-index: 100;
+}
+#profilo{
+    margin-left: 120px;
+    background-color: transparent;
+    border: none;
+}
+#princ{
+    color: white !important;
+}
+.track-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  
+    .track-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      font-size: 0.9rem;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+  
+      .track-image {
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+      }
+  
+      .track-title {
+        font-weight: bold;
+        color: #333;
+      }
+    }
+  }
+  .tit{
+    font-size: 15px;
+  }
+  .text1{
+    font-size: 8px;
+    img{
+        width: 20px;
+    }
+}
+#bctp{
+    border-radius: 50%;
+    border:none
 }
