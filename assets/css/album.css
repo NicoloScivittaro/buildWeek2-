@@ -56,7 +56,28 @@ p {
 }
 
 #navbarAlbum {
-  width: 58%;
-  background-color: black;
+  width: 100%;
   z-index: 3;
+}
+@media screen and (min-width: 768px) {
+  #navbarAlbum {
+    width: 53%;
+  }
+}
+.displayNone {
+  display: flex !important;
+}
+
+.divTracks {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.divTracks:hover {
+  /* Cambia il colore di sfondo in grigio */
+  background-color: #726c6c; /* Puoi personalizzare il colore qui */
+}
+
+a {
+  text-decoration: none !important;
 }

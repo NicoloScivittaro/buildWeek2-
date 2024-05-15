@@ -9,6 +9,9 @@ const artistImageLittle = document.querySelector(".artistImageLittle");
 const mainColumnAlbum = document.getElementById("mainColumnAlbum");
 const buttonPlay = document.getElementById("buttonPlay");
 const albumHero = document.querySelector(".albumHero");
+const navbarAlbum = document.getElementById("navbarAlbum");
+const colorChange = document.querySelectorAll("colorChange");
+const TitleSong = document.getElementById("TitleSong");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -17,10 +20,10 @@ const generateTracks = function (TracksArray) {
     const formattedRank = track.rank.toLocaleString();
 
     const newCol = document.createElement("div");
-    newCol.classList.add("col");
+    newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
-    <div class=" d-flex  align-items-center justify-content-between mb-2"> 
-      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75"><p>${
+    <div class=" d-flex  align-items-center justify-content-between mb-2 divTrack cursorPointer"> 
+      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75 "><p>${
         index + 1
       }</p></div>
       <div class="col-5">
@@ -29,8 +32,10 @@ const generateTracks = function (TracksArray) {
             <p class="titleBold text-light">${track.title}</p>
           </div>
           <div class="col p-0">
-            <p class="artistAlbum text-light text-opacity-75 authorDescription
-            ">${track.artist.name}</p>
+            <a  href="artist.html?artistId=${
+              track.artist.id
+            }" class="artistAlbum text-light text-opacity-75 authorDescription
+            ">${track.artist.name}</a>
           </div>
         </div>
       </div>
@@ -73,17 +78,41 @@ const getAlbumCard = function () {
       if (albumImageBig.complete) {
         const color = colorThief.getColor(albumImageBig);
         applyGradient(color, windowWidth);
-        applyTextColor(color);
+        applyTextColor(color); // chroma
+        applyNavbarColor(color);
       } else {
         albumImageBig.addEventListener("load", function () {
           const color = colorThief.getColor(albumImageBig);
           applyGradient(color, windowWidth);
           applyTextColor(color);
+          applyNavbarColor(color);
         });
       }
 
       generateTracks(albumArray.tracks.data);
+      TitleSong.innerText = albumArray.title;
       numberTransform();
+      let currentAudio = null;
+      const divTracks = document.querySelectorAll(".divTracks");
+      divTracks.forEach((divTrack, index) => {
+        divTrack.addEventListener("dblclick", () => {
+          const previewUrl = albumArray.tracks.data[index].preview;
+          if (currentAudio && currentAudio.src === previewUrl) {
+            if (currentAudio.paused) {
+              currentAudio.play();
+            } else {
+              currentAudio.pause();
+            }
+          } else {
+            if (currentAudio) {
+              currentAudio.pause();
+            }
+            const audio = new Audio(previewUrl);
+            audio.play();
+            currentAudio = audio;
+          }
+        });
+      });
     })
     .catch((err) => {
       console.error("ERRORE", err);
@@ -111,6 +140,7 @@ function applyGradient(color, windowWidth) {
   }
 
   mainColumnAlbum.style.background = gradient;
+  mainColumnAlbum.style.backgroundAttachment = "fixed";
 }
 
 function applyTextColor(color) {
@@ -126,6 +156,17 @@ function applyTextColor(color) {
   albumTracks.style.color = textColor;
   albumDuration.style.color = textColor;
   albumHero.style.color = textColor;
+}
+
+function applyNavbarColor(color) {
+  const backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+  const textColor =
+    chroma.contrast(backgroundColor, "black") >
+    chroma.contrast(backgroundColor, "white")
+      ? "black"
+      : "white";
+  navbarAlbum.style.backgroundColor = backgroundColor;
+  navbarAlbum.style.color = textColor;
 }
 
 const numberTransform = function () {
@@ -159,4 +200,21 @@ buttonsIndietro.forEach((button) => {
   button.addEventListener("click", () => {
     window.location.href = "index.html";
   });
+});
+
+mainColumnAlbum.addEventListener("scroll", () => {
+  const buttonBack = document.getElementById("dinamicScroll");
+
+  const buttonPlayNavbar = document.getElementById("buttonPlayNavbar");
+  const scrollHeight = 250;
+
+  if (mainColumnAlbum.scrollTop > scrollHeight) {
+    buttonBack.style.display = "none";
+
+    buttonPlayNavbar.classList.add("displayNone");
+    TitleSong.classList.add("displayNone");
+  } else {
+    buttonPlayNavbar.classList.remove("displayNone");
+    TitleSong.classList.remove("displayNone");
+  }
 });
