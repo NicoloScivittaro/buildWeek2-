@@ -17,6 +17,7 @@ const nameMainArtistFooter = document.getElementById("nameMainArtistFooter");
 const fotoFooter = document.getElementById("fotoFooter");
 const buttonPlayFooter = document.querySelector(".provadue");
 const volumeSlider = document.getElementById("volumeSlider");
+const mySlider = document.getElementById("mySlider");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -98,7 +99,10 @@ const getAlbumCard = function () {
       TitleSong.innerText = albumArray.title;
 
       numberTransform();
+
       let currentAudio = null;
+      let duration = 0;
+      let currentTime = 0;
       const divTracks = document.querySelectorAll(".divTracks");
       divTracks.forEach((divTrack, index) => {
         divTrack.addEventListener("dblclick", () => {
@@ -109,6 +113,7 @@ const getAlbumCard = function () {
           nameArtistFooter.innerText = currentSongTitle;
           const currentArtistName = albumArray.artist.name;
           nameMainArtistFooter.innerText = currentArtistName;
+
           if (currentAudio && currentAudio.src === previewUrl) {
             if (currentAudio.paused) {
               currentAudio.play();
@@ -120,11 +125,25 @@ const getAlbumCard = function () {
               currentAudio.pause();
             }
             const audio = new Audio(previewUrl);
-            audio.play();
             currentAudio = audio;
+            duration = albumArray.tracks.data[index].duration;
+            mySlider.setAttribute("max", duration);
+            currentAudio.addEventListener("timeupdate", () => {
+              currentTime = currentAudio.currentTime;
+              const percentage = (currentTime / duration) * 100;
+              mySlider.value = currentTime;
+            });
+            audio.play();
           }
         });
       });
+
+      mySlider.addEventListener("input", () => {
+        if (currentAudio) {
+          currentAudio.currentTime = mySlider.value;
+        }
+      });
+
       volumeSlider.addEventListener("input", () => {
         if (currentAudio) {
           const volume = volumeSlider.value / 100;
