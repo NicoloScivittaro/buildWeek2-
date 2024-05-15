@@ -119,16 +119,19 @@ const generateListChart = function (array) {
   ul.innerHTML = ""; // Pulisce il contenuto esistente
   array.forEach((element) => {
     const newLi = document.createElement("li");
+    newLi.classList.add("chart-item");
     newLi.innerHTML = `
+    <a href="artist.html?artistId=${element.artist.id}" class='text-decoration-none'>
       <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
         <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
-          <img src="${element.artist.picture_small}" class="img-fluid"> 
-        </div> 
-        <div> 
-          <h6 class='mb-0 text-light '> ${element.artist.name} </h6>
-          <p class='small mt-0'> Artista</p>
-        </div> 
-      </div>
+            <img src="${element.artist.picture_small}" class="img-fluid"> 
+          </div> 
+          <div> 
+            <h6 class='mb-0 text-light '> ${element.artist.name} </h6>
+            <p class='small mt-0'> Artista</p>
+          </div> 
+        </div>
+      </a>
     `;
     ul.appendChild(newLi);
   });
