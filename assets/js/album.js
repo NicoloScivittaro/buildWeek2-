@@ -16,6 +16,7 @@ const nameArtistFooter = document.getElementById("nameArtistFooter");
 const nameMainArtistFooter = document.getElementById("nameMainArtistFooter");
 const fotoFooter = document.getElementById("fotoFooter");
 const buttonPlayFooter = document.querySelector(".provadue");
+const volumeSlider = document.getElementById("volumeSlider");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -123,6 +124,12 @@ const getAlbumCard = function () {
             currentAudio = audio;
           }
         });
+      });
+      volumeSlider.addEventListener("input", () => {
+        if (currentAudio) {
+          const volume = volumeSlider.value / 100;
+          currentAudio.volume = volume;
+        }
       });
     })
     .catch((err) => {
