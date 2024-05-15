@@ -12,6 +12,10 @@ const albumHero = document.querySelector(".albumHero");
 const navbarAlbum = document.getElementById("navbarAlbum");
 const colorChange = document.querySelectorAll("colorChange");
 const TitleSong = document.getElementById("TitleSong");
+const nameArtistFooter = document.getElementById("nameArtistFooter");
+const nameMainArtistFooter = document.getElementById("nameMainArtistFooter");
+const fotoFooter = document.getElementById("fotoFooter");
+const buttonPlayFooter = document.querySelector(".provadue");
 
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
@@ -58,7 +62,7 @@ const getAlbumCard = function () {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Errore nel recupero dei dettagli dell'evento");
+        throw new Error("Errore big F");
       }
     })
     .then((albumArray) => {
@@ -91,12 +95,19 @@ const getAlbumCard = function () {
 
       generateTracks(albumArray.tracks.data);
       TitleSong.innerText = albumArray.title;
+
       numberTransform();
       let currentAudio = null;
       const divTracks = document.querySelectorAll(".divTracks");
       divTracks.forEach((divTrack, index) => {
         divTrack.addEventListener("dblclick", () => {
           const previewUrl = albumArray.tracks.data[index].preview;
+          const currentPhotoAlbum = albumArray.cover_small;
+          fotoFooter.src = currentPhotoAlbum;
+          const currentSongTitle = albumArray.tracks.data[index].title;
+          nameArtistFooter.innerText = currentSongTitle;
+          const currentArtistName = albumArray.artist.name;
+          nameMainArtistFooter.innerText = currentArtistName;
           if (currentAudio && currentAudio.src === previewUrl) {
             if (currentAudio.paused) {
               currentAudio.play();
@@ -216,5 +227,6 @@ mainColumnAlbum.addEventListener("scroll", () => {
   } else {
     buttonPlayNavbar.classList.remove("displayNone");
     TitleSong.classList.remove("displayNone");
+    buttonBack.style.display = "block";
   }
 });

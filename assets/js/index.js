@@ -1,28 +1,28 @@
-const generateAlbumsCards = function(array) {
+const generateAlbumsCards = function (array) {
   const row = document.getElementById("moreAlbum");
   row.innerHTML = ""; // Pulisce il contenuto esistente
-  array.forEach(element => {
+  array.forEach((element) => {
     const newCol = document.createElement("div");
     newCol.classList.add("col", "mb-4");
     newCol.innerHTML = `
-      <div class="card h-100 d-flex flex-column border-3 bg-dark text-white ">
-        <img src="${element.album.cover_medium}" class="card-img-top mx-auto" alt="album image" style="width:80px,height:80px">
-        <div class="card-body d-flex flex-column justify-content-around">
-          <a href="album.html?albumId=${element.album.id}" class="text-decoration-none text-white "><p class="card-title">${element.album.title}</p></a>
-          <a href="artist.html?artistId=${element.artist.id}" class="text-decoration-none text-white-50"><p class="card-text ">${element.artist.name}</p></a>
-        </div>
-      </div>
+    <div class="card h-100 d-flex flex-column border-3 bg-transparent text-white border-0 p-2">
+    <img src="${element.album.cover_medium}" class="card-img-top mx-auto" alt="album image" style="width:80px,height:80px">
+    <div class="card-body d-flex flex-column ">
+      <a href="album.html?albumId=${element.album.id}" class="text-decoration-none text-white "><p class="card-title mb-0 ">${element.album.title}</p></a>
+      <a href="artist.html?artistId=${element.artist.id}" class="text-decoration-none text-white-50"><p class="card-text small ">${element.artist.name}</p></a>
+    </div>
+  </div>
     `;
     row.appendChild(newCol);
   });
 };
 
-const albumRandom = function(array) {
+const albumRandom = function (array) {
   const indexRandom = Math.floor(Math.random() * array.length);
   console.log(indexRandom);
   let imgRandom = document.getElementById("imgMainAlbum");
   var imageUrl = array[indexRandom].album.cover_medium;
-  imgRandom.setAttribute('src', imageUrl);
+  imgRandom.setAttribute("src", imageUrl);
   const randomAlbum = document.getElementById("randomAlbum");
   randomAlbum.innerHTML = ""; // Pulisce il contenuto esistente
   let newDiv = document.createElement("div");
@@ -40,16 +40,16 @@ const albumRandom = function(array) {
   randomAlbum.appendChild(newDiv);
 };
 
-const getAlbums = function(searchKeyword) {
+const getAlbums = function (searchKeyword) {
   fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchKeyword)
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
         throw new Error("Errore durante la richiesta.");
       }
     })
-    .then(json => {
+    .then((json) => {
       console.log(json.data);
       if (json && json.data) {
         generateAlbumsCards(json.data);
@@ -58,23 +58,21 @@ const getAlbums = function(searchKeyword) {
         console.log("Nessun dato trovato.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.error("ERRORE!", err);
     });
 };
 
-const inputSearch = document.getElementById('inputSearch');
-const searchButton = document.getElementById('searchButton');
-const searchInputWrapper = document.getElementById('searchInputWrapper');
-const spanCerca = document.getElementById('spanCerca');
+const inputSearch = document.getElementById("inputSearch");
+const searchButton = document.getElementById("searchButton");
+const searchInputWrapper = document.getElementById("searchInputWrapper");
+const spanCerca = document.getElementById("spanCerca");
 
-
-searchButton.addEventListener('click', function () {
+searchButton.addEventListener("click", function () {
   getAlbums(inputSearch.value);
-  searchInputWrapper.classList.toggle('d-none');
-  spanCerca.classList.toggle('d-none');
-  inputSearch.value="";
-  
+  searchInputWrapper.classList.toggle("d-none");
+  spanCerca.classList.toggle("d-none");
+  inputSearch.value = "";
 });
 
 // Chiamata iniziale per mostrare album pop
@@ -86,12 +84,10 @@ function login() {
 
   let emailForm = document.getElementById("email");
   let passwordForm = document.getElementById("password");
-  
 
   const buttonIscriviti = document.getElementById("buttonIscriviti");
   const buttonAccedi = document.getElementById("buttonAccedi");
   const buttonLogged = document.getElementById("buttonLogged");
-
 
   if (emailForm.value == email && passwordForm.value == password) {
     buttonIscriviti.classList.remove("d-sm-block");
@@ -104,7 +100,7 @@ function login() {
   }
 }
 
-const getCurrentHour = function() {
+const getCurrentHour = function () {
   let now = new Date();
   let hours = now.getHours();
   let h4Saluto = document.getElementById("saluto");
@@ -118,7 +114,7 @@ const getCurrentHour = function() {
 };
 getCurrentHour();
 
-const generateListChart = function(array) {
+const generateListChart = function (array) {
   const ul = document.getElementById("random-songs");
   ul.innerHTML = ""; // Pulisce il contenuto esistente
   array.forEach((element) => {
@@ -138,7 +134,7 @@ const generateListChart = function(array) {
   });
 };
 
-const getChart = function() {
+const getChart = function () {
   fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap")
     .then((response) => {
       if (response.ok) {
@@ -162,21 +158,19 @@ const getChart = function() {
 
 getChart();
 
-document.addEventListener('DOMContentLoaded', function () {
-  const spanCerca = document.getElementById('spanCerca');
-  const searchIcon = document.getElementById('searchIcon');
-  const searchInputWrapper = document.getElementById('searchInputWrapper');
-  searchIcon.addEventListener('click', function () {
-    searchInputWrapper.classList.toggle('d-none');
-    spanCerca.classList.toggle('d-none');
+document.addEventListener("DOMContentLoaded", function () {
+  const spanCerca = document.getElementById("spanCerca");
+  const searchIcon = document.getElementById("searchIcon");
+  const searchInputWrapper = document.getElementById("searchInputWrapper");
+  searchIcon.addEventListener("click", function () {
+    searchInputWrapper.classList.toggle("d-none");
+    spanCerca.classList.toggle("d-none");
   });
-
-
 
   const anno = document.getElementById("anno");
   const annoCorrente = new Date();
   const currentYear = annoCorrente.getFullYear();
   console.log(currentYear);
 
-  anno.innerText=currentYear;
+  anno.innerText = currentYear;
 });
