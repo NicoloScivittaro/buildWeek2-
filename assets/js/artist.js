@@ -1,11 +1,8 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
   const artistId = new URLSearchParams(location.search).get("artistId");
   if (artistId) {
     await fetchAndDisplayArtistData(artistId);
   }
-
-  // Event listener for window scroll to handle navbar color change and visibility of elements
-  window.addEventListener('scroll', handleScroll);
 });
 
 // Function to fetch and display artist data
@@ -71,7 +68,7 @@ const generateTracks = (tracksArray) => {
     const formattedRank = track.rank.toLocaleString();
 
     const newCol = document.createElement("div");
-    newCol.classList.add("col");
+    newCol.classList.add("col","divTracks");
     newCol.innerHTML = `
       <div class="row d-flex align-items-center justify-content-between mb-2">
         <div class="col-1 d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75">
@@ -95,77 +92,29 @@ const generateTracks = (tracksArray) => {
   });
 };
 
-// Handle scroll event to change navbar style
-const handleScroll = () => {
-  const navbar = document.getElementById('navbar');
-  const button = document.getElementById('get');
-  const artista = document.getElementById('artista1');
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-  if (scrollTop > window.innerHeight / 2) {
-    button.classList.remove('d-none');
-    artista.classList.remove('d-none');
-  } else {
-    button.classList.add('d-none');
-    artista.classList.add('d-none');
-  }
-
-  const content = document.getElementById('btn-play');
-  const contentRect = content.getBoundingClientRect();
-  const scrollMiddle = scrollTop + window.innerHeight / 3;
-
-  if (contentRect.top + contentRect.height / 2 < scrollMiddle) {
-    navbar.classList.add('navbar-white');
-    navbar.classList.remove('bg-transparent');
-  } else {
-    navbar.classList.remove('navbar-white');
-    navbar.classList.add('bg-transparent');
-  }
-
-  applyColorToNavbar();
-};
-
-// Apply color from artist image to navbar
-const applyColorToNavbar = () => {
-  const artistImageBig = document.getElementById('picture');
-  const navbar = document.getElementById('navbar');
-  const colorThief = new ColorThief();
-
-  artistImageBig.crossOrigin = "Anonymous";
-
-  if (artistImageBig.complete) {
-    const color = colorThief.getColor(artistImageBig);
-    navbar.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  } else {
-    artistImageBig.addEventListener("load", () => {
-      const color = colorThief.getColor(artistImageBig);
-      navbar.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-    });
-  }
-};
-
 // Event listener for back button
-const buttonsIndietro = document.querySelectorAll(".buttonIndietro");
-buttonsIndietro.forEach((button) => {
+document.querySelectorAll(".buttonIndietro").forEach((button) => {
   button.addEventListener("click", () => {
     window.location.href = "index.html";
   });
 });
+
 const generateListChart = function (array) {
   const ul = document.getElementById("random-songs");
+  ul.innerHTML = ''; // Clear existing list
   array.forEach((element) => {
     const newLi = document.createElement("li");
     newLi.innerHTML = `
-              <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
-                <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
-                  <img src="${element.artist.picture_small}" class="img-fluid"> 
-                </div> 
-                <div> 
-                  <h6 class='mb-0 text-light '> ${element.artist.name} </h6>
-                  <p class='small mt-0'> Artista</p>
-                </div> 
-              </div>
-        `;
+      <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
+        <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
+          <img src="${element.artist.picture_small}" class="img-fluid"> 
+        </div> 
+        <div> 
+          <h6 class='mb-0 text-light'>${element.artist.name}</h6>
+          <p class='small mt-0'>Artista</p>
+        </div> 
+      </div>
+    `;
     ul.appendChild(newLi);
   });
 };
@@ -180,7 +129,6 @@ const getChart = function () {
       }
     })
     .then((json) => {
-      console.log(json.data);
       if (json && json.data) {
         generateListChart(json.data);
       } else {
@@ -190,6 +138,31 @@ const getChart = function () {
     .catch((err) => {
       console.error("ERRORE!", err);
     });
+};
+
+let currentAudio = null;
+
+const addTrackEventListeners = (tracksArray) => {
+  const divTracks = document.querySelectorAll(".divTracks");
+  divTracks.forEach((divTrack, index) => {
+    divTrack.addEventListener("dblclick", () => {
+      const previewUrl = tracksArray[index].preview;
+      if (currentAudio && currentAudio.src === previewUrl) {
+        if (currentAudio.paused) {
+          currentAudio.play();
+        } else {
+          currentAudio.pause();
+        }
+      } else {
+        if (currentAudio) {
+          currentAudio.pause();
+        }
+        const audio = new Audio(previewUrl);
+        audio.play();
+        currentAudio = audio;
+      }
+    });
+  });
 };
 
 getChart();
