@@ -3,9 +3,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (artistId) {
     await fetchAndDisplayArtistData(artistId);
   }
+  getChart();
 });
 
-// Function to fetch and display artist data
+// Funzione per trasformare i numeri in icone di play al passaggio del mouse
+const numberTransform = function () {
+  const numberTracks = document.querySelectorAll(".numberTrack");
+  numberTracks.forEach((track, index) => {
+    track.addEventListener("mouseover", () => {
+      track.innerHTML = '<i class="bi bi-play-fill"></i>';
+    });
+    track.addEventListener("mouseout", () => {
+      track.innerHTML = `<p>${index + 1}</p>`;
+    });
+  });
+};
+
+// Funzione per recuperare e visualizzare i dati dell'artista
 const fetchAndDisplayArtistData = async (artistId) => {
   try {
     const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
@@ -13,20 +27,18 @@ const fetchAndDisplayArtistData = async (artistId) => {
       throw new Error("Errore nella richiesta");
     }
     const data = await response.json();
-
-    // Update artist information in the DOM
+    // Aggiorna le informazioni dell'artista nel DOM
     document.getElementById("artista").textContent = data.name;
     document.getElementById("artista1").textContent = data.name;
     document.getElementById("nb_fan").textContent = "Ascolti mensili: " + data.nb_fan;
-
     const artistPictureElement = document.getElementById("picture");
     artistPictureElement.src = data.picture_xl;
     artistPictureElement.alt = "Immagine di " + data.name;
-
-    // Fetch and display top tracks
+    // Recupera e visualizza le top tracks
     const topTracks = await getTopTracks(artistId);
     if (topTracks) {
       generateTracks(topTracks);
+      numberTransform();
     } else {
       console.error("No top tracks found");
     }
@@ -35,7 +47,7 @@ const fetchAndDisplayArtistData = async (artistId) => {
   }
 };
 
-// Function to get top tracks of the artist
+// Funzione per recuperare le top tracks dell'artista
 const getTopTracks = async (artistId, limit = 5) => {
   const url = `https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/top?limit=${limit}`;
   try {
@@ -50,6 +62,7 @@ const getTopTracks = async (artistId, limit = 5) => {
       title: track.title,
       duration: track.duration,
       artistName: track.artist.name,
+      preview: track.preview,
     }));
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -57,20 +70,18 @@ const getTopTracks = async (artistId, limit = 5) => {
   }
 };
 
-// Function to generate and display tracks
+// Funzione per generare e visualizzare le tracce
 const generateTracks = (tracksArray) => {
   const tracksArtist = document.querySelector(".tracksArtist");
-  tracksArtist.innerHTML = ""; // Clear existing tracks
-
+  tracksArtist.innerHTML = ""; // Pulisce le tracce esistenti
   tracksArray.forEach((track, index) => {
     const minutes = Math.floor(track.duration / 60);
     const seconds = track.duration % 60;
     const formattedRank = track.rank.toLocaleString();
-
     const newCol = document.createElement("div");
     newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
-      <div class="row d-flex align-items-center justify-content-between mb-2">
+      <div class="row d-flex align-items-center justify-content-between p-1 mb-2">
         <div class="col-1 d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75">
           <p>${index + 1}</p>
         </div>
@@ -81,7 +92,7 @@ const generateTracks = (tracksArray) => {
           <div class="row flex-column">
             <div class="col d-flex text-start p-0">
               <p class="titleBold text-light">${track.title}</p>
-            </div>  
+            </div>
           </div>
         </div>
         <div class="col-3 d-lg-block text-center text-light text-opacity-75">${formattedRank}</div>
@@ -90,18 +101,67 @@ const generateTracks = (tracksArray) => {
     `;
     tracksArtist.appendChild(newCol);
   });
+  addTrackEventListeners(tracksArray);
+};
+let currentAudio = null;
+let duration = 0;
+let currentTime = 0;
+// Funzione per aggiungere gli eventi di doppio clic alle tracce
+const addTrackEventListeners = (tracksArray) => {
+  const divTracks = document.querySelectorAll(".divTracks");
+  divTracks.forEach((divTrack, index) => {
+    divTrack.addEventListener("dblclick", () => {
+      const previewUrl = tracksArray[index].preview;
+      const currentPhotoAlbum = tracksArray[index].pictureXL;
+      const currentSongTitle = tracksArray[index].title;
+      const currentArtistName = tracksArray[index].artistName;
+      // Aggiorna il footer con le informazioni della traccia corrente
+      fotoFooter.src = currentPhotoAlbum;
+      nameArtistFooter.innerText = currentSongTitle;
+      nameMainArtistFooter.innerText = currentArtistName;
+      // Gestisce la riproduzione audio
+      if (currentAudio && currentAudio.src === previewUrl) {
+        if (currentAudio.paused) {
+          currentAudio.play();
+        } else {
+          currentAudio.pause();
+        }
+      } else {
+        if (currentAudio) {
+          currentAudio.pause();
+        }
+        const audio = new Audio(previewUrl);
+        currentAudio = audio;
+        duration = tracksArray[index].duration;
+        // Rende gli slider funzionanti
+        mySlider.setAttribute("max", duration);
+        const volume = volumeSlider.value / 100;
+        currentAudio.volume = volume;
+        currentAudio.addEventListener("volumechange", () => {
+          const volumePercentage = currentAudio.volume * 100;
+          volumeSlider.value = volumePercentage;
+        });
+        currentAudio.addEventListener("timeupdate", () => {
+          currentTime = currentAudio.currentTime;
+          mySlider.value = currentTime;
+        });
+        audio.play();
+      }
+    });
+  });
 };
 
-// Event listener for back button
+// Event listener per il pulsante indietro
 document.querySelectorAll(".buttonIndietro").forEach((button) => {
   button.addEventListener("click", () => {
     window.location.href = "index.html";
   });
 });
 
+// Funzione per generare la lista delle tracce casuali
 const generateListChart = function (array) {
   const ul = document.getElementById("random-songs");
-  ul.innerHTML = ""; // Clear existing list
+  ul.innerHTML = ""; // Pulisce la lista esistente
   array.forEach((element) => {
     const newLi = document.createElement("li");
     newLi.innerHTML = `
@@ -121,49 +181,34 @@ const generateListChart = function (array) {
   });
 };
 
-const getChart = function () {
-  fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap")
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Errore durante la richiesta.");
-      }
-    })
-    .then((json) => {
-      if (json && json.data) {
-        generateListChart(json.data);
-      } else {
-        console.log("Nessun dato trovato.");
-      }
-    })
-    .catch((err) => {
-      console.error("ERRORE!", err);
-    });
+// Funzione per recuperare e visualizzare la classifica delle tracce casuali
+const getChart = async function () {
+  try {
+    const response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap");
+    if (!response.ok) {
+      throw new Error("Errore durante la richiesta.");
+    }
+    const json = await response.json();
+    if (json && json.data) {
+      generateListChart(json.data);
+    } else {
+      console.log("Nessun dato trovato.");
+    }
+  } catch (err) {
+    console.error("ERRORE!", err);
+  }
 };
-getChart();
 
-let currentAudio = null;
+// Event listeners per gli slider
+mySlider.addEventListener("input", () => {
+  if (currentAudio) {
+    currentAudio.currentTime = mySlider.value;
+  }
+});
 
-const addTrackEventListeners = (tracksArray) => {
-  const divTracks = document.querySelectorAll(".divTracks");
-  divTracks.forEach((divTrack, index) => {
-    divTrack.addEventListener("dblclick", () => {
-      const previewUrl = tracksArray[index].preview;
-      if (currentAudio && currentAudio.src === previewUrl) {
-        if (currentAudio.paused) {
-          currentAudio.play();
-        } else {
-          currentAudio.pause();
-        }
-      } else {
-        if (currentAudio) {
-          currentAudio.pause();
-        }
-        const audio = new Audio(previewUrl);
-        audio.play();
-        currentAudio = audio;
-      }
-    });
-  });
-};
+volumeSlider.addEventListener("input", () => {
+  if (currentAudio) {
+    const volume = volumeSlider.value / 100;
+    currentAudio.volume = volume;
+  }
+});

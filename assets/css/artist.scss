@@ -99,6 +99,11 @@ main{
 }
 .btn-play{
     border-radius: 50%;
+    background-color:#1ED760
+}
+.btn-play:hover{
+    border-radius: 50%;
+    background-color:#1ED760
 }
 .btn-followers{
 border:1px solid gray;
@@ -168,12 +173,12 @@ z-index: 100;
     }
   }
   .tit{
-    font-size: 20px;
+    font-size: 25px;
   }
   .text1{
     font-size: 12px;
     img{
-        width: 20px;
+        width: 25px;
     }
 }
 #bctp{
@@ -191,3 +196,30 @@ z-index: 100;
     max-height: 400px; /* Adjust height as needed */
     overflow-y: auto;
 }
+#navbar {
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.accountImage {
+    width: 30px;
+    height: 30px;
+}
+#dropdown{
+    z-index: 1000;
+}
+
+@media screen and (min-width: 575px) {
+    #navbar1{
+      width: 70%;
+    }
+  }
+@media screen and (min-width: 990px) {
+    #navbar1{
+      width: 55%;
+    }
+  }
+  .hover:hover{
+    color: var(--bs-dark) !important;
+  }

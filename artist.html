@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>artist page</title>
+  <title>Spotify - Lettore web : musica per tutti</title>
+  <link rel="shortcut icon" href="./assets/imgs/main/spotifyLogo.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -63,9 +64,10 @@
 
         <div class="col-12 col-sm-9 offset-sm-2 offset-md-0 col-lg-7 overflow-y-scroll overflow-x-hidden  vh-100 px-2 mx-0">
           <nav>
-              <div class="row mt-2 p-0" style="background-color: transparent;">
-                  <div class="col-12 position-relative justify-content-center" id="navbar">
-                      <div class="row">
+            <div class=" p-0 position-relative">
+              <div class="row mt-2 p-0 bg-transparent  position-absolute w-100 " id="navbar">
+                  <div id="navbar1" class="col-12 bg-transparent justify-content-between position-fixed">
+                      <div class="row ">
                           <div class="col d-flex justify-content-start">
                               <button class="rounded-circle text-white border-0 bg-transparent buttonIndietro">
                                   <i class="bi bi-chevron-left"></i>
@@ -80,24 +82,25 @@
                               </button>
                               <h2 class="artist-name text-white d-none" id="artista1"></h2>
                           </div>
-                          <div class="col d-flex justify-content-end">
+                          <div  class="col d-flex justify-content-end">
                               <div class="dropdown">
-                                  <button class="btn btn-secondary dropdown-toggle rounded-5 p-0 px-1 fontAccount d-lg-block" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <button id="dropdown" class="position-relative  btn btn-secondary dropdown-toggle rounded-5 p-0 px-1 fontAccount" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       <img src="https://www.udiscovermusic.com/wp-content/uploads/2018/07/Tony-Allen-And-Jeff-Mills-Tomorrow-Comes-The-Harvest-album-cover-web-optimised-820.jpg" alt="" class="accountImage rounded-circle" />
                                       Lidia Nautilus
                                   </button>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Action</a></li>
-                                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                  <ul class="dropdown-menu bg-dark">
+                                    <li><a class="dropdown-item text-white hover " href="#"
+                                    >Account</a></li>
+                                    <li><a class="dropdown-item text-white hover" href="#">Profilo</a></li>
+                                    <li><a class="dropdown-item text-white hover" href="#">Impostazioni</a></li>     
                                   </ul>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
-          </nav>
-      
+          </div>
+      </nav>
           <div class="container-fluid">
               <div class="row position-relative">
                   <div class="col-12 p-0">
@@ -116,7 +119,7 @@
           <div class="container-fluid overflow-auto"   style="height: 400px;"> 
               <div class="row">
                   <div class="col-12">
-                      <button id="btn-play" class="btn btn-success btn-play m-3"><i class="bi bi-play-fill"></i></button>
+                      <button id="btn-play" class="btn btn-play m-3 "><i class="bi bi-play-fill"></i></button>
                       <button class="btn btn-transparent text-white btn-followers m-3">Followers</button>
                       <button class="btn btn-transparent text-white btn-menu m-3">
                           <i class="bi bi-three-dots"></i>
@@ -216,37 +219,101 @@
         </div>
     </div>
 </main>
-<footer class="container-fluid bg-black mx-0 position-fixed bottom-0 ">
-  <div class="row text-white flex-column flex-sm-row justify-content-center ">
+<footer class="container-fluid bg-black mx-0 position-fixed bottom-0 pb-2">
+  <div
+    class="row text-white flex-column flex-sm-row justify-content-center"
+  >
     <div class="col-12 col-sm-4 d-flex align-items-center text-white">
-      <img src="./assets/imgs/main/image-1.jpg" alt="Foto_prova" style="height: 53px; width: 60px;">
+      <img
+        src="./assets/imgs/main/image-1.jpg"
+        alt="Foto_prova"
+        style="height: 53px; width: 60px"
+        id="fotoFooter"
+      />
       <div class="mx-3 mt-1">
-        <a href="#" class="text-decoration-none text-white">nome canzone</a>
-        <p><a class="text-decoration-none text-secondary" href="#">artista</a></p>
+        <a
+          href="#"
+          class="text-decoration-none text-light"
+          id="nameArtistFooter"
+          >nome canzone</a
+        >
+        <p>
+          <a
+            class="text-decoration-none text-secondary"
+            id="nameMainArtistFooter"
+            href="#"
+            >artista</a
+          >
+        </p>
       </div>
       <a href=""><i class="hover_heart bi bi-heart text-secondary"></i></a>
     </div>
     <div class="col-12 col-sm-4 d-flex align-items-center flex-column mt-1">
-      <div class="d-flex flex-row justify-content-between align-items-center">
-      <a href="#" class="text-decoration-none p-1"><i class="bi bi-shuffle text-secondary fs-5"></i></a>
-      <a href="#" class="text-decoration-none p-1"><i class="bi bi-chevron-bar-left text-secondary fs-3"></i></a>
-      <div id="provatre">
-        <a href="#" class="text-decoration-none p-1 prova"><i class="provadue bi bi-play-circle-fill text-white fs-3"></i></a>
+      <div
+        class="d-flex flex-row justify-content-between align-items-center"
+      >
+        <a href="#" class="text-decoration-none p-1">
+          <i class="bi bi-shuffle text-secondary fs-5"></i>
+        </a>
+        <a href="#" class="text-decoration-none p-1">
+          <i class="bi bi-chevron-bar-left text-secondary fs-3"></i>
+        </a>
+        <div id="provatre">
+          <a href="#" class="text-decoration-none p-1 prova">
+            <i class="provadue bi bi-play-circle-fill text-white fs-3"></i>
+          </a>
+        </div>
+        <a href="#" class="text-decoration-none p-1">
+          <i class="bi bi-chevron-bar-right text-secondary fs-3"></i>
+        </a>
+        <a href="#" class="text-decoration-none p-1">
+          <i class="bi bi-repeat text-secondary fs-5"></i>
+        </a>
       </div>
-      
-      <a href="#" class="text-decoration-none p-1"><i class="bi bi-chevron-bar-right text-secondary fs-3"></i></a>
-      <a href="#" class="text-decoration-none p-1"><i class="bi bi-repeat text-secondary fs-5"></i></a>
-      </div>
-      <input type="range" min="1" max="100" value="50" class="slider" id="mySlider">
+      <input
+        type="range"
+        min="1"
+        max="100"
+        value="0"
+        class="slider"
+        id="mySlider"
+      />
+      <div class="progress-bar"></div>
     </div>
-    <div class="col-12 col-sm-4 d-flex align-items-center flex-column mt-1 justify-content-center">
-      <div class="d-flex flex-row justify-content-between align-items-center align-self-end ">
-        <a href="#" class="text-decoration-none p-1"><i class="bi bi-file-play-fill text-secondary fs-5 d-none d-sm-flex "></i></a>
-        <a href="#" class="text-decoration-none p-1"><i class="bi bi-mic-fill text-secondary fs-3 d-none d-sm-flex"></i></a>
-        <a href="#" class="text-decoration-none p-1"><i class="bi bi-list text-secondary fs-3 d-none d-sm-flex"></i></a>
-        <a href="#" class="text-decoration-none p-1"><i class="bi bi-volume-off text-secondary fs-3"></i></a>
-        <input type="range" min="1" max="100" value="50" class="slider">
-        <a href="#" class="text-decoration-none p-1"><i class="bi bi-arrows-fullscreen text-secondary fs-5"></i></a> 
+
+    <div
+      class="col-12 col-sm-4 d-flex align-items-center flex-column mt-1 justify-content-center"
+    >
+      <div
+        class="d-flex flex-row justify-content-between align-items-center align-self-end"
+      >
+        <a href="#" class="text-decoration-none p-1"
+          ><i
+            class="bi bi-file-play-fill text-secondary fs-5 d-none d-sm-flex"
+          ></i
+        ></a>
+        <a href="#" class="text-decoration-none p-1"
+          ><i
+            class="bi bi-mic-fill text-secondary fs-3 d-none d-sm-flex"
+          ></i
+        ></a>
+        <a href="#" class="text-decoration-none p-1"
+          ><i class="bi bi-list text-secondary fs-3 d-none d-sm-flex"></i
+        ></a>
+        <a href="#" class="text-decoration-none p-1"
+          ><i class="bi bi-volume-off text-secondary fs-3"></i
+        ></a>
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="20"
+          class="slider"
+          id="volumeSlider"
+        />
+        <a href="#" class="text-decoration-none p-1"
+          ><i class="bi bi-arrows-fullscreen text-secondary fs-5"></i
+        ></a>
       </div>
     </div>
   </div>
