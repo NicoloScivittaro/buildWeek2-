@@ -101,6 +101,12 @@ main {
 
 .btn-play {
   border-radius: 50%;
+  background-color: #1ED760;
+}
+
+.btn-play:hover {
+  border-radius: 50%;
+  background-color: #1ED760;
 }
 
 .btn-followers {
@@ -176,14 +182,14 @@ main {
 }
 
 .tit {
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .text1 {
   font-size: 12px;
 }
 .text1 img {
-  width: 20px;
+  width: 25px;
 }
 
 #bctp {
@@ -201,4 +207,30 @@ main {
 .container-fluid[style] {
   max-height: 400px; /* Adjust height as needed */
   overflow-y: auto;
+}
+
+#navbar {
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.accountImage {
+  width: 30px;
+  height: 30px;
+}
+
+#dropdown {
+  z-index: 1000;
+}
+
+@media screen and (min-width: 575px) {
+  #navbar1 {
+    width: 70%;
+  }
+}
+@media screen and (min-width: 990px) {
+  #navbar1 {
+    width: 55%;
+  }
 }/*# sourceMappingURL=artist.css.map */
