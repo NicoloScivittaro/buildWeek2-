@@ -233,4 +233,7 @@ main {
   #navbar1 {
     width: 55%;
   }
+}
+.hover:hover {
+  color: var(--bs-dark) !important;
 }/*# sourceMappingURL=artist.css.map */
