@@ -20,6 +20,7 @@ const buttonPlayFooter = document.querySelector(".provadue");
 const volumeSlider = document.getElementById("volumeSlider");
 const mySlider = document.getElementById("mySlider");
 const progressBar = document.querySelector(".progress-bar");
+const playPauseButton = document.querySelectorAll(".buttonPlayAndStop");
 
 // ----Genero le Track----
 const generateTracks = function (TracksArray) {
@@ -32,20 +33,26 @@ const generateTracks = function (TracksArray) {
     newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
     <div class=" d-flex  align-items-center justify-content-between mb-2 divTrack cursorPointer"> 
-      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75 "><p>${index + 1}</p></div>
+      <div class="col-1 d-none d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75 "><p>${
+        index + 1
+      }</p></div>
       <div class="col-5">
         <div class="row flex-column ">
           <div class="col d-flex text-start p-0">
             <p class="titleBold text-light">${track.title}</p>
           </div>
           <div class="col p-0">
-            <a  href="artist.html?artistId=${track.artist.id}" class="artistAlbum text-light text-opacity-75 authorDescription
+            <a  href="artist.html?artistId=${
+              track.artist.id
+            }" class="artistAlbum text-light text-opacity-75 authorDescription
             ">${track.artist.name}</a>
           </div>
         </div>
       </div>
       <div class="col-4 d-none d-lg-block text-center text-light text-opacity-75">${formattedRank}</div>
-      <div class="col-2  text-end text-light text-opacity-75 mobileChange">${minutes}:${seconds < 10 ? "0" : ""}${seconds}</div> 
+      <div class="col-2  text-end text-light text-opacity-75 mobileChange">${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}</div> 
       </div>
     `;
     tracksAlbum.appendChild(newCol);
@@ -141,6 +148,11 @@ const getAlbumCard = function () {
             });
             audio.play();
           }
+          const iconFooter = document.querySelector(".bi-play-circle-fill");
+          if (iconFooter) {
+            iconFooter.classList.remove("bi-play-circle-fill");
+            iconFooter.classList.add("bi-pause-circle-fill");
+          }
         });
       });
 
@@ -155,6 +167,23 @@ const getAlbumCard = function () {
           const volume = volumeSlider.value / 100;
           currentAudio.volume = volume;
         }
+      });
+      playPauseButton.forEach((button) => {
+        button.addEventListener("click", () => {
+          console.log("ciao");
+          if (currentAudio) {
+            console.log(currentAudio);
+            if (currentAudio.paused) {
+              button.classList.remove("bi-play-circle-fill");
+              button.classList.add("bi-pause-circle-fill");
+              currentAudio.play();
+            } else {
+              currentAudio.pause();
+              button.classList.remove("bi-pause-circle-fill");
+              button.classList.add("bi-play-circle-fill");
+            }
+          }
+        });
       });
     })
     .catch((err) => {
@@ -188,7 +217,11 @@ function applyGradient(color, windowWidth) {
 // ----Con chroma faccio si che il testo sia sempre leggibile----
 function applyTextColor(color) {
   const backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  const textColor = chroma.contrast(backgroundColor, "black") > chroma.contrast(backgroundColor, "white") ? "black" : "white";
+  const textColor =
+    chroma.contrast(backgroundColor, "black") >
+    chroma.contrast(backgroundColor, "white")
+      ? "black"
+      : "white";
   titleAlbumBig.style.color = textColor;
   artistAlbum.style.color = textColor;
   releaseAlbum.style.color = textColor;
@@ -199,7 +232,11 @@ function applyTextColor(color) {
 
 function applyNavbarColor(color) {
   const backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  const textColor = chroma.contrast(backgroundColor, "black") > chroma.contrast(backgroundColor, "white") ? "black" : "white";
+  const textColor =
+    chroma.contrast(backgroundColor, "black") >
+    chroma.contrast(backgroundColor, "white")
+      ? "black"
+      : "white";
   navbarAlbum.style.backgroundColor = backgroundColor;
   navbarAlbum.style.color = textColor;
 }
@@ -285,7 +322,9 @@ const generateListChart = function (array) {
 // Funzione per recuperare e visualizzare la classifica delle tracce casuali
 const getChart = async function () {
   try {
-    const response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap");
+    const response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/deezer/search?q=rap"
+    );
     if (!response.ok) {
       throw new Error("Errore durante la richiesta.");
     }

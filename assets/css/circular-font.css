@@ -147,12 +147,12 @@ footer li a:hover {
   height: 15px;
   background: white; /* Colore iniziale del thumb */
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   border-radius: 10px;
 }
 
 .slider:hover {
-  background: #1db954;
+  background: #1db954; /* Colore di sfondo durante l'hover */
 }
 
 .slider:hover::-webkit-slider-thumb {
