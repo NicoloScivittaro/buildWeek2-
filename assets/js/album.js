@@ -1,3 +1,4 @@
+// ----Dichiarazioni variabili----
 const albumImageBig = document.querySelector(".albumImageBig");
 const titleAlbumBig = document.querySelector(".titleAlbumBig");
 const artistAlbum = document.querySelector(".artistAlbum");
@@ -18,7 +19,9 @@ const fotoFooter = document.getElementById("fotoFooter");
 const buttonPlayFooter = document.querySelector(".provadue");
 const volumeSlider = document.getElementById("volumeSlider");
 const mySlider = document.getElementById("mySlider");
+const progressBar = document.querySelector(".progress-bar");
 
+// ----Genero le Track----
 const generateTracks = function (TracksArray) {
   TracksArray.forEach((track, index) => {
     const minutes = Math.floor(track.duration / 60);
@@ -78,6 +81,7 @@ const getAlbumCard = function () {
       const durataTotaleAlbumStringa = `${durataTotaleAlbumMin} min ${durataTotaleAlbumSecRimasti} sec`;
       albumTracks.innerText = `${albumArray.nb_tracks} brani,  ${durataTotaleAlbumStringa}`;
       artistImageLittle.src = albumArray.artist.picture_small;
+      // ----Mi prendo il colore dominante----
       const colorThief = new ColorThief();
       albumImageBig.crossOrigin = "Anonymous";
       const windowWidth = window.innerWidth;
@@ -100,6 +104,7 @@ const getAlbumCard = function () {
 
       numberTransform();
 
+      // ----Rendo le track cliccabili----
       let currentAudio = null;
       let duration = 0;
       let currentTime = 0;
@@ -113,7 +118,7 @@ const getAlbumCard = function () {
           nameArtistFooter.innerText = currentSongTitle;
           const currentArtistName = albumArray.artist.name;
           nameMainArtistFooter.innerText = currentArtistName;
-
+          // ----Gestisco il play and stop sinconizzandole nel footer----
           if (currentAudio && currentAudio.src === previewUrl) {
             if (currentAudio.paused) {
               currentAudio.play();
@@ -127,7 +132,14 @@ const getAlbumCard = function () {
             const audio = new Audio(previewUrl);
             currentAudio = audio;
             duration = albumArray.tracks.data[index].duration;
+            // ----Rendo gli slider funzionanti----
             mySlider.setAttribute("max", duration);
+            const volume = volumeSlider.value / 100;
+            currentAudio.volume = volume;
+            currentAudio.addEventListener("volumechange", () => {
+              const volumePercentage = currentAudio.volume * 100;
+              volumeSlider.value = volumePercentage;
+            });
             currentAudio.addEventListener("timeupdate", () => {
               currentTime = currentAudio.currentTime;
               const percentage = (currentTime / duration) * 100;
@@ -157,7 +169,7 @@ const getAlbumCard = function () {
 };
 
 getAlbumCard();
-
+// ----Cambio il gradiente lineare a seconda della vw----
 function applyGradient(color, windowWidth) {
   const gradientColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
   let gradient;
@@ -179,7 +191,7 @@ function applyGradient(color, windowWidth) {
   mainColumnAlbum.style.background = gradient;
   mainColumnAlbum.style.backgroundAttachment = "fixed";
 }
-
+// ----Con chroma faccio si che il testo sia sempre leggibile----
 function applyTextColor(color) {
   const backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
   const textColor =
@@ -206,6 +218,7 @@ function applyNavbarColor(color) {
   navbarAlbum.style.color = textColor;
 }
 
+// ----Effetto all hover del number----
 const numberTransform = function () {
   const numberTracks = document.querySelectorAll(".numberTrack");
 
@@ -220,6 +233,7 @@ const numberTransform = function () {
   });
 };
 
+// ----Effetti icons----
 const icons = document.querySelectorAll(".iconTop");
 
 icons.forEach((icon) => {
@@ -232,6 +246,7 @@ icons.forEach((icon) => {
   });
 });
 
+// ----Reindirizzamento----
 const buttonsIndietro = document.querySelectorAll(".buttonIndietro");
 buttonsIndietro.forEach((button) => {
   button.addEventListener("click", () => {
@@ -239,6 +254,7 @@ buttonsIndietro.forEach((button) => {
   });
 });
 
+// ----Cambiamenti dell hero----
 mainColumnAlbum.addEventListener("scroll", () => {
   const buttonBack = document.getElementById("dinamicScroll");
 
