@@ -151,6 +151,10 @@ footer li a:hover {
   border-radius: 10px;
 }
 
+.slider:hover {
+  background: #1db954; /* Colore di sfondo durante l'hover */
+}
+
 .slider:hover::-webkit-slider-thumb {
   opacity: 1; /* Thumb visibile durante l'hover */
 }

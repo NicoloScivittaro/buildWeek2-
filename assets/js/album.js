@@ -20,6 +20,7 @@ const buttonPlayFooter = document.querySelector(".provadue");
 const volumeSlider = document.getElementById("volumeSlider");
 const mySlider = document.getElementById("mySlider");
 const progressBar = document.querySelector(".progress-bar");
+const playPauseButton = document.querySelectorAll(".buttonPlayAndStop");
 
 // ----Genero le Track----
 const generateTracks = function (TracksArray) {
@@ -147,6 +148,11 @@ const getAlbumCard = function () {
             });
             audio.play();
           }
+          const iconFooter = document.querySelector(".bi-play-circle-fill");
+          if (iconFooter) {
+            iconFooter.classList.remove("bi-play-circle-fill");
+            iconFooter.classList.add("bi-pause-circle-fill");
+          }
         });
       });
 
@@ -161,6 +167,23 @@ const getAlbumCard = function () {
           const volume = volumeSlider.value / 100;
           currentAudio.volume = volume;
         }
+      });
+      playPauseButton.forEach((button) => {
+        button.addEventListener("click", () => {
+          console.log("ciao");
+          if (currentAudio) {
+            console.log(currentAudio);
+            if (currentAudio.paused) {
+              button.classList.remove("bi-play-circle-fill");
+              button.classList.add("bi-pause-circle-fill");
+              currentAudio.play();
+            } else {
+              currentAudio.pause();
+              button.classList.remove("bi-pause-circle-fill");
+              button.classList.add("bi-play-circle-fill");
+            }
+          }
+        });
       });
     })
     .catch((err) => {
