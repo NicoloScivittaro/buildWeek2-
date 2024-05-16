@@ -114,15 +114,15 @@ const getCurrentHour = function () {
 };
 getCurrentHour();
 
-const generateListChart = function (array) {
+const generateListChart = function (array, isIndexPage) {
   const ul = document.getElementById("random-songs");
-  ul.innerHTML = ""; // Pulisce il contenuto esistente
+  ul.innerHTML = "";
   array.forEach((element) => {
     const newLi = document.createElement("li");
-    newLi.classList.add("chart-item");
-    newLi.innerHTML = `
+    if (isIndexPage) {
+      newLi.innerHTML = `
     <a href="artist.html?artistId=${element.artist.id}" class='text-decoration-none'>
-      <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
+      <div class='d-flex gap-3 rounded-2 p-2 artist-list'>
         <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
             <img src="${element.artist.picture_small}" class="img-fluid"> 
           </div> 
@@ -133,6 +133,20 @@ const generateListChart = function (array) {
         </div>
       </a>
     `;
+    } else {
+      newLi.innerHTML = `
+        <div class='artist-list d-flex gap-3 rounded-2 p-2'>
+          <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
+              <img src="${element.artist.picture_small}" class="img-fluid"> 
+            </div> 
+            <div> 
+              <h6 class='mb-0 text-light '> ${element.artist.name} </h6>
+              <p class='small mt-0'> Artista</p>
+            </div> 
+          </div>
+      `;
+    }
+
     ul.appendChild(newLi);
   });
 };
@@ -149,7 +163,8 @@ const getChart = function () {
     .then((json) => {
       console.log(json.data);
       if (json && json.data) {
-        generateListChart(json.data);
+        const isIndexPage = window.location.pathname === "/index.html";
+        generateListChart(json.data, isIndexPage);
       } else {
         console.log("Nessun dato trovato.");
       }
@@ -159,9 +174,8 @@ const getChart = function () {
     });
 };
 
-getChart();
-
 document.addEventListener("DOMContentLoaded", function () {
+  getChart();
   const spanCerca = document.getElementById("spanCerca");
   const searchIcon = document.getElementById("searchIcon");
   const searchInputWrapper = document.getElementById("searchInputWrapper");

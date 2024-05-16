@@ -105,7 +105,7 @@ footer li a:hover {
   scrollbar-width: auto;
 }
 
-#artist-list:hover {
+.artist-list:hover {
   background-color: rgb(211, 211, 211, 0.1);
   cursor: pointer;
 }
@@ -132,22 +132,22 @@ footer li a:hover {
 .slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 4px;
-  background: white; /* Colore iniziale dello slider */
+  height: 5px;
+  background: white;
   outline: none;
   opacity: 0.7;
-  transition: background 0.3s; /* Transizione del colore di sfondo */
+  transition: background 0.3s;
   border-radius: 10px;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   background: white; /* Colore iniziale del thumb */
   cursor: pointer;
-  opacity: 1; /* Thumb inizialmente non visibile */
+  opacity: 0;
   border-radius: 10px;
 }
 
@@ -156,12 +156,11 @@ footer li a:hover {
 }
 
 .slider:hover::-webkit-slider-thumb {
-  opacity: 1; /* Thumb visibile durante l'hover */
+  opacity: 1;
 }
 
-/* Sovrascrive il colore predefinito delle icone al passaggio del mouse */
 .text-decoration-none:hover .bi {
-  color: white !important; /* Colore bianco con importanza */
+  color: white !important;
 }
 
 #provatre {
