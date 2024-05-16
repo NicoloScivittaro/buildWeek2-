@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener("DOMContentLoaded", async function () {
   const artistId = new URLSearchParams(location.search).get("artistId");
   if (artistId) {
     await fetchAndDisplayArtistData(artistId);
@@ -10,28 +10,28 @@ const fetchAndDisplayArtistData = async (artistId) => {
   try {
     const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
     if (!response.ok) {
-      throw new Error('Errore nella richiesta');
+      throw new Error("Errore nella richiesta");
     }
     const data = await response.json();
 
     // Update artist information in the DOM
-    document.getElementById('artista').textContent = data.name;
-    document.getElementById('artista1').textContent = data.name;
-    document.getElementById('nb_fan').textContent = 'Ascolti mensili: ' + data.nb_fan;
+    document.getElementById("artista").textContent = data.name;
+    document.getElementById("artista1").textContent = data.name;
+    document.getElementById("nb_fan").textContent = "Ascolti mensili: " + data.nb_fan;
 
-    const artistPictureElement = document.getElementById('picture');
+    const artistPictureElement = document.getElementById("picture");
     artistPictureElement.src = data.picture_xl;
-    artistPictureElement.alt = 'Immagine di ' + data.name;
+    artistPictureElement.alt = "Immagine di " + data.name;
 
     // Fetch and display top tracks
     const topTracks = await getTopTracks(artistId);
     if (topTracks) {
       generateTracks(topTracks);
     } else {
-      console.error('No top tracks found');
+      console.error("No top tracks found");
     }
   } catch (error) {
-    console.error('Si è verificato un errore:', error);
+    console.error("Si è verificato un errore:", error);
   }
 };
 
@@ -41,18 +41,18 @@ const getTopTracks = async (artistId, limit = 5) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error('Errore nella richiesta');
+      throw new Error("Errore nella richiesta");
     }
     const data = await response.json();
-    return data.data.map(track => ({
+    return data.data.map((track) => ({
       rank: track.rank,
       pictureXL: track.album.cover_xl,
       title: track.title,
       duration: track.duration,
-      artistName: track.artist.name
+      artistName: track.artist.name,
     }));
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     return null;
   }
 };
@@ -60,7 +60,7 @@ const getTopTracks = async (artistId, limit = 5) => {
 // Function to generate and display tracks
 const generateTracks = (tracksArray) => {
   const tracksArtist = document.querySelector(".tracksArtist");
-  tracksArtist.innerHTML = ''; // Clear existing tracks
+  tracksArtist.innerHTML = ""; // Clear existing tracks
 
   tracksArray.forEach((track, index) => {
     const minutes = Math.floor(track.duration / 60);
@@ -68,7 +68,7 @@ const generateTracks = (tracksArray) => {
     const formattedRank = track.rank.toLocaleString();
 
     const newCol = document.createElement("div");
-    newCol.classList.add("col","divTracks");
+    newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
       <div class="row d-flex align-items-center justify-content-between mb-2">
         <div class="col-1 d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75">
@@ -101,19 +101,21 @@ document.querySelectorAll(".buttonIndietro").forEach((button) => {
 
 const generateListChart = function (array) {
   const ul = document.getElementById("random-songs");
-  ul.innerHTML = ''; // Clear existing list
+  ul.innerHTML = ""; // Clear existing list
   array.forEach((element) => {
     const newLi = document.createElement("li");
     newLi.innerHTML = `
-      <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
-        <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
+    <a href="artist.html?artistId=${element.artist.id}" class='text-decoration-none'>
+    <div class='d-flex gap-3 rounded-2 p-2 artist-list'>
+      <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
           <img src="${element.artist.picture_small}" class="img-fluid"> 
         </div> 
         <div> 
-          <h6 class='mb-0 text-light'>${element.artist.name}</h6>
-          <p class='small mt-0'>Artista</p>
+          <h6 class='mb-0 text-light '> ${element.artist.name} </h6>
+          <p class='small mt-0'> Artista</p>
         </div> 
       </div>
+    </a>
     `;
     ul.appendChild(newLi);
   });
@@ -139,6 +141,7 @@ const getChart = function () {
       console.error("ERRORE!", err);
     });
 };
+getChart();
 
 let currentAudio = null;
 
@@ -164,5 +167,3 @@ const addTrackEventListeners = (tracksArray) => {
     });
   });
 };
-
-getChart();

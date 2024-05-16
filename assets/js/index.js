@@ -122,7 +122,7 @@ const generateListChart = function (array, isIndexPage) {
     if (isIndexPage) {
       newLi.innerHTML = `
     <a href="artist.html?artistId=${element.artist.id}" class='text-decoration-none'>
-      <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
+      <div class='d-flex gap-3 rounded-2 p-2 artist-list'>
         <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
             <img src="${element.artist.picture_small}" class="img-fluid"> 
           </div> 
@@ -135,7 +135,7 @@ const generateListChart = function (array, isIndexPage) {
     `;
     } else {
       newLi.innerHTML = `
-        <div class='d-flex gap-3 rounded-2 p-2' id='artist-list'>
+        <div class='artist-list d-flex gap-3 rounded-2 p-2'>
           <div class='rounded-circle overflow-hidden' style='width: 2.5em'> 
               <img src="${element.artist.picture_small}" class="img-fluid"> 
             </div> 

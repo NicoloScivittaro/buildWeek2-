@@ -105,7 +105,7 @@ footer li a:hover {
   scrollbar-width: auto;
 }
 
-#artist-list:hover {
+.artist-list:hover {
   background-color: rgb(211, 211, 211, 0.1);
   cursor: pointer;
 }
