@@ -147,7 +147,7 @@ footer li a:hover {
   height: 15px;
   background: white; /* Colore iniziale del thumb */
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   border-radius: 10px;
 }
 
