@@ -84,7 +84,7 @@ const generateTracks = (tracksArray) => {
     const newCol = document.createElement("div");
     newCol.classList.add("col", "divTracks");
     newCol.innerHTML = `
-      <div class="row d-flex align-items-center justify-content-between p-1 mb-2 fs-6">
+      <div class="row d-flex align-items-center justify-content-between p-1 mb-2 fs-6 ">
         <div class="col-1 d-lg-block text-center numberTrack cursorPointer text-light text-opacity-75">
           <p>${index + 1}</p>
         </div>
@@ -241,4 +241,7 @@ volumeSlider.addEventListener("input", () => {
     const volume = volumeSlider.value / 100;
     currentAudio.volume = volume;
   }
+});
+document.getElementById('backButton').addEventListener('click', function() {
+  history.back();
 });

@@ -194,3 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   anno.innerText = currentYear;
 });
+document.getElementById('backButton').addEventListener('click', function() {
+  history.back();
+});
