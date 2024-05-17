@@ -41,7 +41,10 @@ const albumRandom = function (array) {
 };
 
 const getAlbums = function (searchKeyword) {
-  fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchKeyword)
+  fetch(
+    "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+      searchKeyword
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();

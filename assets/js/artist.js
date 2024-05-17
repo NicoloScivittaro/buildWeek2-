@@ -22,7 +22,9 @@ const numberTransform = function () {
 // Funzione per recuperare e visualizzare i dati dell'artista
 const fetchAndDisplayArtistData = async (artistId) => {
   try {
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
+    const response = await fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`
+    );
     if (!response.ok) {
       throw new Error("Errore nella richiesta");
     }
@@ -30,7 +32,8 @@ const fetchAndDisplayArtistData = async (artistId) => {
     // Aggiorna le informazioni dell'artista nel DOM
     document.getElementById("artista").textContent = data.name;
     document.getElementById("artista1").textContent = data.name;
-    document.getElementById("nb_fan").textContent = "Ascolti mensili: " + data.nb_fan;
+    document.getElementById("nb_fan").textContent =
+      "Ascolti mensili: " + data.nb_fan;
     const artistPictureElement = document.getElementById("picture");
     artistPictureElement.src = data.picture_xl;
     artistPictureElement.alt = "Immagine di " + data.name;
@@ -96,7 +99,9 @@ const generateTracks = (tracksArray) => {
           </div>
         </div>
         <div class="col-3 d-lg-block text-center text-light text-opacity-75">${formattedRank}</div>
-        <div class="col-2 text-end text-light text-opacity-75 mobileChange">${minutes}:${seconds < 10 ? "0" : ""}${seconds}</div>
+        <div class="col-2 text-end text-light text-opacity-75 mobileChange">${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}</div>
       </div>
     `;
     tracksArtist.appendChild(newCol);
@@ -147,6 +152,29 @@ const addTrackEventListeners = (tracksArray) => {
         });
         audio.play();
       }
+      const iconFooter = document.querySelector(".bi-play-circle-fill");
+      if (iconFooter) {
+        iconFooter.classList.remove("bi-play-circle-fill");
+        iconFooter.classList.add("bi-pause-circle-fill");
+      }
+      const playPauseButton = document.querySelectorAll(".buttonPlayAndStop");
+      playPauseButton.forEach((button) => {
+        button.addEventListener("click", () => {
+          console.log("ciao");
+          if (currentAudio) {
+            console.log(currentAudio);
+            if (currentAudio.paused) {
+              button.classList.remove("bi-play-circle-fill");
+              button.classList.add("bi-pause-circle-fill");
+              currentAudio.play();
+            } else {
+              currentAudio.pause();
+              button.classList.remove("bi-pause-circle-fill");
+              button.classList.add("bi-play-circle-fill");
+            }
+          }
+        });
+      });
     });
   });
 };
@@ -184,7 +212,9 @@ const generateListChart = function (array) {
 // Funzione per recuperare e visualizzare la classifica delle tracce casuali
 const getChart = async function () {
   try {
-    const response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap");
+    const response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/deezer/search?q=rap"
+    );
     if (!response.ok) {
       throw new Error("Errore durante la richiesta.");
     }
