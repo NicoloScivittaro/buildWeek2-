@@ -95,3 +95,8 @@ a {
 .hover:hover{
   color: var(--bs-dark) !important;
 }
+@media screen and (max-width: 575px) {
+  #vuoto{
+    margin-top: 50px;
+  }
+}
