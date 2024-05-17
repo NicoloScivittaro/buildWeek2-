@@ -41,7 +41,10 @@ const albumRandom = function (array) {
 };
 
 const getAlbums = function (searchKeyword) {
-  fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchKeyword)
+  fetch(
+    "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+      searchKeyword
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -190,4 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log(currentYear);
 
   anno.innerText = currentYear;
+});
+document.getElementById('backButton').addEventListener('click', function() {
+  history.back();
 });

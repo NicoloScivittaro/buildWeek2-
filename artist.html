@@ -117,7 +117,7 @@
                         >
                           <i class="bi bi-chevron-left"></i>
                         </button>
-                        <button
+                        <button id="backButton"
                           class="rounded-circle text-white border-0 bg-transparent"
                         >
                           <i class="bi bi-chevron-right"></i>
@@ -197,7 +197,7 @@
               </div>
             </div>
 
-            <div class="container-fluid overflow-auto" style="height: 400px">
+            <div class="container-fluid overflow-auto">
               <div class="row">
                 <div class="col-12">
                   <button id="btn-play" class="btn btn-play m-3">
@@ -218,7 +218,7 @@
                 <div id="boh" class="col-md-7">
                   <h2 class="tit">Popolari</h2>
                   <div
-                    class="row artistTitles mx-3 mt-2 align-items-center tracksArtist flex-column text1"
+                    class="row artistTitles mx-3 mt-2 align-items-center tracksArtist flex-column text1  "
                   >
                     <!-- Lista di 5 elementi -->
                   </div>
@@ -241,6 +241,7 @@
                 </div>
               </div>
             </div>
+           
           </div>
 
           <aside class="col-2 d-none d-lg-block bg-black vh-100 p-0">
@@ -372,8 +373,9 @@
           </aside>
         </div>
       </div>
+      
     </main>
-    <footer class="container-fluid bg-black mx-0 position-fixed bottom-0 pb-2">
+    <footer class="container-fluid bg-black mx-0 position-fixed bottom-0 pb-2 mt-5 ">
       <div
         class="row text-white flex-column flex-sm-row justify-content-center"
       >
@@ -414,7 +416,9 @@
             </a>
             <div id="provatre">
               <a href="#" class="text-decoration-none p-1 prova">
-                <i class="provadue bi bi-play-circle-fill text-white fs-3"></i>
+                <i
+                  class="provadue bi bi-play-circle-fill text-white fs-3 buttonPlayAndStop"
+                ></i>
               </a>
             </div>
             <a href="#" class="text-decoration-none p-1">
